@@ -16,7 +16,7 @@ import 'package:anima/app/app_widget.dart';
 
 import 'shared/auth/repository/auth_repository_interface.dart';
 
-cclass AppModule extends MainModule {
+class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
     Bind((i) => AppController()),

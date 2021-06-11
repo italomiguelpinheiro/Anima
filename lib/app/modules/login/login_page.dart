@@ -128,21 +128,15 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
-                      onPressed: () {
-                        print(_emailController.text);
-                        print(_passwordController.text);
-                        //_controller.authUser(_emailController.text, _passwordController.text).then((data) { store.setUser(data);
-                        Modular.to.pushReplacementNamed('/home');
-                      }),
+                       //_controller.authUser(_emailController.text, _passwordController.text).then((data) { store.setUser(data);
+                      onPressed: controller.loginWithEmailAndPassword),
                   SizedBox(height: 20),
                   Center(child: Text("Ou")),
                   SizedBox(height: 20),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: GestureDetector(
-                      onTap: () {
-                        print("Tocou aqui");
-                      },
+                      onTap: controller.loginWithGoogle,
                       child: Container(
                         decoration: BoxDecoration(
                             border: Border.all(color: Color(0xff333131)),
