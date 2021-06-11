@@ -29,6 +29,17 @@ abstract class _LoginControllerBase with Store {
   }
 
   @action
+  Future loginWithEmailAndPassword() async {
+    try {
+      loading = true;
+      await auth.loginWithEmailAndPassword();
+      Modular.to.pushReplacementNamed('/home');
+    } catch (e) {
+      loading = false;
+    }
+  }
+
+  @action
   void increment() {
     value++;
   }
