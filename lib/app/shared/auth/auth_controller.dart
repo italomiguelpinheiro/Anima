@@ -36,6 +36,11 @@ abstract class _AuthControllerBase with Store {
   }
 
   @action
+  Future loginWithEmailAndPassword() async {
+    await _authRepository.getEmailPasswordLogin();
+  }
+
+  @action
   Future logout() {
     return _authRepository.getLogout();
   }

@@ -8,14 +8,26 @@ class AuthRepository implements IAuthRepository{
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
-  Future getEmailPasswordLogin() {
-    // TODO: implement getEmailPasswordLogin
-    throw UnimplementedError();
+  Future getEmailPasswordLogin() async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: "barry.allen@example.com",
+        password: "SuperSecretPassword!"
+      );
+      print('userCredential $userCredential');
+    } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
   Future<UserCredential> getGoogleLogin() async {
-  
    // Trigger the authentication flow
   final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
   print('googleUser $googleUser');

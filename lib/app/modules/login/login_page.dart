@@ -21,7 +21,8 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
       ),
       body: Column(
         children: <Widget>[
-          RaisedButton(onPressed: controller.loginWithGoogle, child: Text("Login with Google"))
+          RaisedButton(onPressed: controller.loginWithGoogle, child: Text("Login with Google")),
+          RaisedButton(onPressed: controller.loginWithEmailAndPassword, child: Text("Login with Email and Password"))
         ],
       ),
     );
