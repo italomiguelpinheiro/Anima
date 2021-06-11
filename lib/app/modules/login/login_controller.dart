@@ -19,7 +19,6 @@ abstract class _LoginControllerBase with Store {
 
 @action
   Future loginWithGoogle() async {
-    print('login_controller');
     try {
       loading = true;
       await auth.loginWithGoogle();

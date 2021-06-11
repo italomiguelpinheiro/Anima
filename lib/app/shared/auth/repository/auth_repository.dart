@@ -15,7 +15,7 @@ class AuthRepository implements IAuthRepository{
 
   @override
   Future<UserCredential> getGoogleLogin() async {
-  print('auth_repository getGoogleLogin');
+  
    // Trigger the authentication flow
   final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
   print('googleUser $googleUser');
@@ -45,6 +45,11 @@ class AuthRepository implements IAuthRepository{
   @override
   User? getUser() {
       return _auth.currentUser;
+  }
+
+  @override
+  Future getLogout() {
+    return _auth.signOut();
   }
 
 }

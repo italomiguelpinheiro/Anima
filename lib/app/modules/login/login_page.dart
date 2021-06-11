@@ -15,7 +15,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
 
   @override
   Widget build(BuildContext context) {
-     print('build');
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
