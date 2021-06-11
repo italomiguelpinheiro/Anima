@@ -1,21 +1,29 @@
 import 'package:anima/app/app_controller.dart';
 import 'package:anima/app/modules/home/home_controller.dart';
+import 'package:anima/app/modules/home/home_module.dart';
 import 'package:anima/app/modules/home/home_page.dart';
 import 'package:anima/app/modules/login/login_controller.dart';
+import 'package:anima/app/modules/login/login_module.dart';
 import 'package:anima/app/modules/login/login_page.dart';
 import 'package:anima/app/modules/splash/splash_page.dart';
+import 'package:anima/app/shared/auth/repository/auth_repository.dart';
 import 'package:anima/app/shared/auth/repository/dio_repository.dart';
+import 'package:anima/app/shared/auth/auth_controller.dart';
+
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 import 'package:anima/app/app_widget.dart';
-import 'package:anima/app/modules/home/home_module.dart';
 
-class AppModule extends MainModule {
+import 'shared/auth/repository/auth_repository_interface.dart';
+
+cclass AppModule extends MainModule {
   @override
   List<Bind> get binds => [
     Bind((i) => AppController()),
+    Bind((i) => AuthController()),
     Bind((i) => LoginController()),
     Bind((i) => HomeController()),
+    Bind<IAuthRepository>((i) => AuthRepository()),
     //Bind((i) => LocalStorageHive()),
   ];
 
