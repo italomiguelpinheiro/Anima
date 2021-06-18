@@ -1,4 +1,5 @@
 import 'package:anima/app/modules/reminder/components/custom_switch.dart';
+import 'package:anima/app/modules/reminder/page/challange_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -63,7 +64,13 @@ class _ReminderPageState
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChallengePage()),
+                        );
+                      },
                       icon: Icon(Icons.arrow_forward_outlined)),
                 ],
               ),
@@ -95,16 +102,15 @@ class _ReminderPageState
                   CrazySwitch()
                 ],
               ),
-              
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, bottom: 30),
               child: Container(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                        child: Text(
-                      "Ativa ou desativa todas as notificações de estratégia: cartões de enfrentamento, registro de emoções e lembretes.",
-                      style: TextStyle(fontWeight: FontWeight.w300),
-                    )),
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  child: Text(
+                    "Ativa ou desativa todas as notificações de estratégia: cartões de enfrentamento, registro de emoções e lembretes.",
+                    style: TextStyle(fontWeight: FontWeight.w300),
+                  )),
             ),
             Container(
               height: 2,
@@ -123,16 +129,15 @@ class _ReminderPageState
                   CrazySwitch()
                 ],
               ),
-              
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, bottom: 30),
               child: Container(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                        child: Text(
-                      "Registre suas emoções durante acessos longos em aplicativos selecionados.",
-                      style: TextStyle(fontWeight: FontWeight.w300),
-                    )),
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  child: Text(
+                    "Registre suas emoções durante acessos longos em aplicativos selecionados.",
+                    style: TextStyle(fontWeight: FontWeight.w300),
+                  )),
             ),
             Container(
               height: 2,
@@ -151,16 +156,15 @@ class _ReminderPageState
                   CrazySwitch()
                 ],
               ),
-              
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, bottom: 30),
               child: Container(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                        child: Text(
-                      "Seja notificado sobre os benefícios e malefícios em usar aplicativos por muito tempo.",
-                      style: TextStyle(fontWeight: FontWeight.w300),
-                    )),
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  child: Text(
+                    "Seja notificado sobre os benefícios e malefícios em usar aplicativos por muito tempo.",
+                    style: TextStyle(fontWeight: FontWeight.w300),
+                  )),
             ),
             Container(
               height: 2,
@@ -179,23 +183,21 @@ class _ReminderPageState
                   CrazySwitch()
                 ],
               ),
-              
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, bottom: 30),
               child: Container(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                        child: Text(
-                      "Sincronize sua agenda para receber notificações personalizadas ao sair da rotina planejada.",
-                      style: TextStyle(fontWeight: FontWeight.w300),
-                    )),
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  child: Text(
+                    "Sincronize sua agenda para receber notificações personalizadas ao sair da rotina planejada.",
+                    style: TextStyle(fontWeight: FontWeight.w300),
+                  )),
             ),
             Container(
               height: 2,
               width: MediaQuery.of(context).size.width,
               color: Color(0xffE8E8E8),
             ),
-            
           ],
         ),
       ),

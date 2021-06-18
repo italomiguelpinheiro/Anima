@@ -10,6 +10,7 @@ import 'package:anima/app/modules/home/home_page_view.dart';
 import 'package:anima/app/modules/login/login_controller.dart';
 import 'package:anima/app/modules/login/login_module.dart';
 import 'package:anima/app/modules/login/login_page.dart';
+import 'package:anima/app/modules/reminder/page/challange_page.dart';
 import 'package:anima/app/modules/reminder/reminder_controller.dart';
 import 'package:anima/app/modules/reminder/reminder_page.dart';
 import 'package:anima/app/modules/splash/splash_page.dart';
@@ -44,7 +45,8 @@ class AppModule extends MainModule {
         ModularRouter('/home', child: (i, args) => HomePage()),
         ModularRouter('/emotion', child: (i, args) => EmotionPage()),
         ModularRouter('/content', child: (i, args) => ContentPage()),
-        ModularRouter('/remider', child: (i, args) => ReminderPage())
+        ModularRouter('/remider', child: (i, args) => ReminderPage()),
+       
       ];
 
   @override

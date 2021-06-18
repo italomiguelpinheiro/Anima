@@ -38,122 +38,127 @@ class _EmotionPageState extends ModularState<EmotionPage, EmotionController> {
         ),
       ),
       body: Container(
+        height: MediaQuery.of(context).size.height,
         color: Color(0xffE8E8E8),
-        child: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+        child: SingleChildScrollView(
+          child: Container(
+            child: Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Suas emoções diárias",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.filter_alt_outlined,
+                              color: Color(0xff208062)))
+                    ],
+                  ),
+                  SizedBox(height: 25),
                   Text(
-                    "Suas emoções diárias",
+                    "Ranking de emoções",
                     style: TextStyle(fontSize: 20),
                   ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.filter_alt_outlined,
-                          color: Color(0xff208062)))
-                ],
-              ),
-              SizedBox(height: 25),
-              Text(
-                "Ranking de emoções",
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(height: 20),
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/emotions/emotions.svg',
-                    height: 270,
-                  ),
-                  SizedBox(width: 20),
-                  Container(
-                    height: 325,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(                          
+                  SizedBox(height: 20),
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/emotions/emotions.svg',
+                        height: 270,
+                      ),
+                      SizedBox(width: 20),
+                      Container(
+                        height: 325,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            LinearPercentIndicator(
-                              lineHeight: 10,
-                              width: 140,
-                              percent: 0.2,
-                              backgroundColor: Colors.grey,
-                              progressColor: Color(0xff2CB289),
+                            Row(
+                              children: [
+                                LinearPercentIndicator(
+                                  lineHeight: 10,
+                                  width: 140,
+                                  percent: 0.2,
+                                  backgroundColor: Colors.grey,
+                                  progressColor: Color(0xff2CB289),
+                                ),
+                                Text("Tranquilo (20%)")
+                              ],
                             ),
-                            Text("Tranquilo (20%)")
+                            Row(
+                              children: [
+                                LinearPercentIndicator(
+                                  lineHeight: 10,
+                                  width: 140,
+                                  percent: 0.4,
+                                  backgroundColor: Colors.grey,
+                                  progressColor: Color(0xff2CB289),
+                                ),
+                                Text("Triste (40%)")
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                LinearPercentIndicator(
+                                  lineHeight: 10,
+                                  width: 140,
+                                  percent: 0.9,
+                                  backgroundColor: Colors.grey,
+                                  progressColor: Color(0xff2CB289),
+                                ),
+                                Text("Alegre (90%)")
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                LinearPercentIndicator(
+                                  lineHeight: 10,
+                                  width: 140,
+                                  percent: 0.3,
+                                  backgroundColor: Colors.grey,
+                                  progressColor: Color(0xff2CB289),
+                                ),
+                                Text("Valorizado (30%)")
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                LinearPercentIndicator(
+                                  lineHeight: 10,
+                                  width: 140,
+                                  percent: 0.5,
+                                  backgroundColor: Colors.grey,
+                                  progressColor: Color(0xff2CB289),
+                                ),
+                                Text("Ansioso (50%)")
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                LinearPercentIndicator(
+                                  lineHeight: 10,
+                                  width: 140,
+                                  percent: 0.1,
+                                  backgroundColor: Colors.grey,
+                                  progressColor: Color(0xff2CB289),
+                                ),
+                                Text("Irritado (10%)")
+                              ],
+                            ),
                           ],
                         ),
-                        Row(
-                          children: [
-                            LinearPercentIndicator(
-                              lineHeight: 10,
-                              width: 140,
-                              percent: 0.4,
-                              backgroundColor: Colors.grey,
-                              progressColor: Color(0xff2CB289),
-                            ),
-                            Text("Triste (40%)")
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            LinearPercentIndicator(
-                              lineHeight: 10,
-                              width: 140,
-                              percent: 0.9,
-                              backgroundColor: Colors.grey,
-                              progressColor: Color(0xff2CB289),
-                            ),
-                            Text("Alegre (90%)")
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            LinearPercentIndicator(
-                              lineHeight: 10,
-                              width: 140,
-                              percent: 0.3,
-                              backgroundColor: Colors.grey,
-                              progressColor: Color(0xff2CB289),
-                            ),
-                            Text("Valorizado (30%)")
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            LinearPercentIndicator(
-                              lineHeight: 10,
-                              width: 140,
-                              percent: 0.5,
-                              backgroundColor: Colors.grey,
-                              progressColor: Color(0xff2CB289),
-                            ),
-                            Text("Ansioso (50%)")
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            LinearPercentIndicator(
-                              lineHeight: 10,
-                              width: 140,
-                              percent: 0.1,
-                              backgroundColor: Colors.grey,
-                              progressColor: Color(0xff2CB289),
-                            ),
-                            Text("Irritado (10%)")
-                          ],
-                        ),
-                      ],
-                    ),
+                      )
+                    ],
                   )
                 ],
-              )
-            ],
+              ),
+            ),
           ),
         ),
       ),
