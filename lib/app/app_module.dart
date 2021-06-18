@@ -1,10 +1,17 @@
 import 'package:anima/app/app_controller.dart';
+import 'package:anima/app/modules/content/content_controller.dart';
+import 'package:anima/app/modules/content/content_page.dart';
+import 'package:anima/app/modules/emotion/emotion_controller.dart';
+import 'package:anima/app/modules/emotion/emotion_page.dart';
 import 'package:anima/app/modules/home/home_controller.dart';
 import 'package:anima/app/modules/home/home_module.dart';
 import 'package:anima/app/modules/home/home_page.dart';
+import 'package:anima/app/modules/home/home_page_view.dart';
 import 'package:anima/app/modules/login/login_controller.dart';
 import 'package:anima/app/modules/login/login_module.dart';
 import 'package:anima/app/modules/login/login_page.dart';
+import 'package:anima/app/modules/reminder/reminder_controller.dart';
+import 'package:anima/app/modules/reminder/reminder_page.dart';
 import 'package:anima/app/modules/splash/splash_page.dart';
 import 'package:anima/app/shared/auth/repository/auth_repository.dart';
 import 'package:anima/app/shared/auth/repository/dio_repository.dart';
@@ -23,6 +30,9 @@ class AppModule extends MainModule {
     Bind((i) => AuthController()),
     Bind((i) => LoginController()),
     Bind((i) => HomeController()),
+    Bind((i) => EmotionController()),
+    Bind((i) => ContentController()),
+    Bind((i) => ReminderController()),
     Bind<IAuthRepository>((i) => AuthRepository()),
     //Bind((i) => LocalStorageHive()),
   ];
@@ -31,7 +41,10 @@ class AppModule extends MainModule {
   List<ModularRouter> get routers => [
         ModularRouter(Modular.initialRoute, child: (i, args) =>  SplashPage()),
         ModularRouter('/login', child: (i, args) => LoginPage()),
-        ModularRouter('/home', child: (i, args) => HomePage())
+        ModularRouter('/home', child: (i, args) => HomePage()),
+        ModularRouter('/emotion', child: (i, args) => EmotionPage()),
+        ModularRouter('/content', child: (i, args) => ContentPage()),
+        ModularRouter('/remider', child: (i, args) => ReminderPage())
       ];
 
   @override

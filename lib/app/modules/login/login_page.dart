@@ -129,7 +129,10 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                        //_controller.authUser(_emailController.text, _passwordController.text).then((data) { store.setUser(data);
-                      onPressed: controller.loginWithEmailAndPassword),
+                      onPressed: (){
+                    Modular.to.pushReplacementNamed('/home');
+
+                      }),//controller.loginWithEmailAndPassword),
                   SizedBox(height: 20),
                   Center(child: Text("Ou")),
                   SizedBox(height: 20),

@@ -1,89 +1,79 @@
+import 'package:anima/app/app_controller.dart';
+import 'package:anima/app/modules/content/content_page.dart';
+import 'package:anima/app/modules/emotion/emotion_page.dart';
+import 'package:anima/app/modules/home/home_controller.dart';
+import 'package:anima/app/modules/home/home_page_view.dart';
+import 'package:anima/app/modules/reminder/reminder_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:usage_stats/usage_stats.dart';
-import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
-  final String title;
-  const HomePage({Key? key, this.title = "Home"}) : super(key: key);
-
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
   //use 'controller' variable to access controller
-  late List<EventUsageInfo>  events;
-  late List<UsageInfo>  usage;
-
-  @override
-  void initState() {
+  final _controllerHome = Modular.get<HomeController>();
+  final _controllerApp = Modular.get<AppController>();
+  
+  
+  int _currentIndex = 0;
+  final PageStorageBucket bucket = PageStorageBucket();
+  final tabs = [HomePageView(), EmotionPage(), ContentPage(), ReminderPage(), Container()];
+   
+@override
+ void initState()  {
     super.initState();
-    initUsage();
   }
-
-  Future<void> initUsage() async {
-    UsageStats.grantUsagePermission();
-    DateTime endDate = new DateTime.now();
-    DateTime startDate = DateTime(endDate.year, endDate.month, 09, 0, 0, 0);
-
-    List<EventUsageInfo> queryEvents = await UsageStats.queryEvents(startDate, endDate);
-    List<UsageInfo> usageStats = await UsageStats.queryUsageStats(startDate, endDate);
-
-    this.setState(() {
-      events = queryEvents.reversed.toList();
-      usage = usageStats.reversed.toList();
-      
-    });
-  }
-
+  
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.4,
-              decoration: BoxDecoration(
-                color: Color(0xff2CB289),
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(20),
-                    bottomLeft: Radius.circular(20)),
-              ),
-              child: Column(
-                children: [],
-              ),
-            ),
-          ],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: Color(0xff2CB289),),
-              title: Text("Dados")
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border,color: Color(0xff2CB289),),
-              title: Text("Emoções")
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.note, color: Color(0xff2CB289),),
-              title: Text("Conteúdo")
 
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.doorbell_outlined,color: Color(0xff2CB289),),
-              title: Text("Lembretes")
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person,color: Color(0xff2CB289),),
-              title: Text("Perfil")
-            )
-          ],
-        ),
+    return Scaffold(
+      body:PageStorage(
+        bucket: bucket,
+        child: tabs[_currentIndex],
+      ), 
+      //HomePageView(widthCel: _widthCel),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        type: BottomNavigationBarType.shifting,
+        unselectedItemColor: Colors.grey,
+        elevation: 3,
+        showSelectedLabels: false,
+        selectedItemColor: Color(0xff2CB289),
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text("Home"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            title: Text("Receitas"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.wysiwyg_outlined),
+            title: Text("Conversa"),
+          ),
+          
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_alert_outlined),
+            title: Text("Conversa"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            title: Text("Perfil"),
+          ),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
     );
   }
 }
+
+
