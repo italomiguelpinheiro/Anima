@@ -24,11 +24,19 @@ mixin _$DatabaseController on _DatabaseControllerBase, Store {
     });
   }
 
+  final _$addEventsAsyncAction =
+      AsyncAction('_DatabaseControllerBase.addEvents');
+
+  @override
+  Future addEvents(List<EventUsageInfo> usageInfoList) {
+    return _$addEventsAsyncAction.run(() => super.addEvents(usageInfoList));
+  }
+
   final _$_DatabaseControllerBaseActionController =
       ActionController(name: '_DatabaseControllerBase');
 
   @override
-  Stream<List<EventModel>> getEvents() {
+  CollectionReference<EventModel> getEvents() {
     final _$actionInfo = _$_DatabaseControllerBaseActionController.startAction(
         name: '_DatabaseControllerBase.getEvents');
     try {

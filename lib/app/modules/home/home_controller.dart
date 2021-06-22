@@ -1,6 +1,10 @@
 import 'package:anima/app/shared/auth/auth_controller.dart';
+import 'package:anima/app/shared/database/database_controller.dart';
+import 'package:anima/app/shared/models/event_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:usage_stats/usage_stats.dart';
 
 part 'home_controller.g.dart';
 
@@ -8,6 +12,8 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
+  DatabaseController db = Modular.get();
+
   @observable
   int value = 0;
 
@@ -23,5 +29,20 @@ abstract class _HomeControllerBase with Store {
 
   getToken() async {
     await Modular.get<AuthController>().getToken();
+  }
+
+  @action
+  void addEvent(List<EventUsageInfo> eventUsageList) {
+    db.addEvents(eventUsageList);
+  }
+
+  @action
+  void getEvent() async {
+    List<QueryDocumentSnapshot<EventModel>> events =
+        await db.getEvents().get().then((snapshot) => snapshot.docs);
+
+    events.forEach((element) {
+      print(element.toString());
+    });
   }
 }

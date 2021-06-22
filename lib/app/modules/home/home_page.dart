@@ -13,8 +13,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
   //use 'controller' variable to access controller
-  late List<EventUsageInfo>  events;
-  late List<UsageInfo>  usage;
+  late List<EventUsageInfo> events;
+  late List<UsageInfo> usage;
 
   @override
   void initState() {
@@ -25,15 +25,18 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   Future<void> initUsage() async {
     UsageStats.grantUsagePermission();
     DateTime endDate = new DateTime.now();
-    DateTime startDate = DateTime(endDate.year, endDate.month, 09, 0, 0, 0);
+    DateTime startDate = DateTime(endDate.year, endDate.month, 21, 0, 0, 0);
 
-    List<EventUsageInfo> queryEvents = await UsageStats.queryEvents(startDate, endDate);
-    List<UsageInfo> usageStats = await UsageStats.queryUsageStats(startDate, endDate);
+    List<EventUsageInfo> queryEvents =
+        await UsageStats.queryEvents(startDate, endDate);
+    List<UsageInfo> usageStats =
+        await UsageStats.queryUsageStats(startDate, endDate);
 
     this.setState(() {
       events = queryEvents.reversed.toList();
       usage = usageStats.reversed.toList();
-      
+
+      print(events[0]);
     });
   }
 
@@ -53,7 +56,16 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                     bottomLeft: Radius.circular(20)),
               ),
               child: Column(
-                children: [],
+                children: [
+                  RaisedButton(onPressed: () {
+                    controller.addEvent(events);
+                  }),
+                  RaisedButton(
+                      onPressed: () {
+                        controller.getEvent();
+                      },
+                      child: Text("GET"))
+                ],
               ),
             ),
           ],
@@ -61,26 +73,35 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: Color(0xff2CB289),),
-              title: Text("Dados")
-            ),
+                icon: Icon(
+                  Icons.home,
+                  color: Color(0xff2CB289),
+                ),
+                title: Text("Dados")),
             BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border,color: Color(0xff2CB289),),
-              title: Text("Emoções")
-            ),
+                icon: Icon(
+                  Icons.favorite_border,
+                  color: Color(0xff2CB289),
+                ),
+                title: Text("Emoções")),
             BottomNavigationBarItem(
-              icon: Icon(Icons.note, color: Color(0xff2CB289),),
-              title: Text("Conteúdo")
-
-            ),
+                icon: Icon(
+                  Icons.note,
+                  color: Color(0xff2CB289),
+                ),
+                title: Text("Conteúdo")),
             BottomNavigationBarItem(
-              icon: Icon(Icons.doorbell_outlined,color: Color(0xff2CB289),),
-              title: Text("Lembretes")
-            ),
+                icon: Icon(
+                  Icons.doorbell_outlined,
+                  color: Color(0xff2CB289),
+                ),
+                title: Text("Lembretes")),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person,color: Color(0xff2CB289),),
-              title: Text("Perfil")
-            )
+                icon: Icon(
+                  Icons.person,
+                  color: Color(0xff2CB289),
+                ),
+                title: Text("Perfil"))
           ],
         ),
       ),

@@ -25,7 +25,7 @@ vars:
 scripts:
   mobx_build: $runner build
   mobx_watch: $clean & $get & $runner watch
-  mobx_build_clean: $clean & $get & $runner build --delete-conflicting-outputs
+  mobx_build_clean: $clean & $get & $build_runner --delete-conflicting-outputs
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

@@ -39,6 +39,28 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
+  void addEvent(List<EventUsageInfo> eventUsageList) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.addEvent');
+    try {
+      return super.addEvent(eventUsageList);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void getEvent() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.getEvent');
+    try {
+      return super.getEvent();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 value: ${value}

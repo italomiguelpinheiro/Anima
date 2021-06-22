@@ -50,6 +50,11 @@ abstract class _AuthControllerBase with Store {
   Future getToken() {
     return _authRepository.getToken();
   }
+
+  @action
+  User? getCurrentUser() {
+    return user;
+  }
 }
 
 enum AuthStatus { loading, login, logoff }
