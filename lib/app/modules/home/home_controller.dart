@@ -1,7 +1,9 @@
 import 'package:anima/app/shared/auth/auth_controller.dart';
 import 'package:anima/app/shared/database/database_controller.dart';
+import 'package:anima/app/shared/models/config_model.dart';
 import 'package:anima/app/shared/models/emotion_model.dart';
 import 'package:anima/app/shared/models/event_model.dart';
+import 'package:anima/app/shared/models/usage_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -39,17 +41,24 @@ abstract class _HomeControllerBase with Store {
 
   @action
   Future<void> getEvent() async {
-    List<QueryDocumentSnapshot<EventModel>> events =
-        await db.getEvents().get().then((snapshot) => snapshot.docs);
-
-    events.forEach((element) {
-      print(element.toString());
-    });
+    CollectionReference<EventModel> events =
+        db.getEvents("com.example.anima", "1");
+    events.get().then((value) => value.docs.forEach((element) {
+          print(element.data().toJson());
+        }));
   }
 
   @action
   void addUsage(List<UsageInfo> usageInfoList) {
     db.addUsage(usageInfoList);
+  }
+
+  @action
+  void getUsage() {
+    CollectionReference<UsageModel> usages = db.getUsages("com.example.anima");
+    usages.get().then((value) => value.docs.forEach((element) {
+          print(element.data().toJson());
+        }));
   }
 
   @action
@@ -59,7 +68,24 @@ abstract class _HomeControllerBase with Store {
   }
 
   @action
+  void getEmotions() {
+    CollectionReference<EmotionModel> emotions =
+        db.getEmotions("com.example.anima");
+    emotions.get().then((value) => value.docs.forEach((element) {
+          print(element.data().toJson());
+        }));
+  }
+
+  @action
   void addConfig() {
     db.addConfigs(true, false, false, false, false, false);
+  }
+
+  @action
+  void getConfigs() {
+    CollectionReference<ConfigModel> configs = db.getConfigs();
+    configs.get().then((value) => value.docs.forEach((element) {
+          print(element.data().toJson());
+        }));
   }
 }

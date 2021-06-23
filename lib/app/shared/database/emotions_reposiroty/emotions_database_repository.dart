@@ -24,7 +24,7 @@ class EmotionsDatabaseRepository implements IEmotionsDatabaseRepository {
         .collection("emotions");
     return emotions
         .add({
-          'emotionStatus': emotionStatus.toString(),
+          'emotionStatus': emotionStatus.toShortString(),
           'timeStamp': timeStamp,
           'exposedContent': exposedContent,
           'thoughts': thoughts,
@@ -34,12 +34,14 @@ class EmotionsDatabaseRepository implements IEmotionsDatabaseRepository {
   }
 
   @override
-  CollectionReference<EmotionModel> getEmotions() {
+  CollectionReference<EmotionModel> getEmotions(String packageName) {
     final uid = auth.getCurrentUser()?.uid;
     final emotionRef = firestore
-        .collection("users")
+        .collection('users')
         .doc(uid)
-        .collection("events")
+        .collection("apps")
+        .doc(packageName)
+        .collection("emotions")
         .withConverter<EmotionModel>(
           fromFirestore: (snapshot, _) =>
               EmotionModel.fromJson(snapshot.data()!),

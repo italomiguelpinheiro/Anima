@@ -30,12 +30,12 @@ class AppModule extends MainModule {
         Bind((i) => AuthController()),
         Bind((i) => LoginController()),
         Bind((i) => HomeController()),
+        Bind<IAuthRepository>((i) => AuthRepository()),
         Bind((i) => DatabaseController()),
         Bind<IEventsDatabaseRepository>(
             (i) => EventsDatabaseRepository(FirebaseFirestore.instance)),
         Bind<IUsageDatabaseRepository>(
             (i) => UsageDatabaseRepository(FirebaseFirestore.instance)),
-        Bind<IAuthRepository>((i) => AuthRepository()),
         Bind<IEmotionsDatabaseRepository>(
             (i) => EmotionsDatabaseRepository(FirebaseFirestore.instance)),
         Bind<IConfigsDatabaseRepository>(

@@ -9,5 +9,5 @@ abstract class IUsageDatabaseRepository {
     String lastTimeUsed,
     String totalTimeInForeground,
   );
-  CollectionReference<UsageModel> getUsages();
+  CollectionReference<UsageModel> getUsages(String packageName);
 }

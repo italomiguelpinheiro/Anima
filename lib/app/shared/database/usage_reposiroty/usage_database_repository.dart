@@ -39,12 +39,14 @@ class UsageDatabaseRepository implements IUsageDatabaseRepository {
   }
 
   @override
-  CollectionReference<UsageModel> getUsages() {
+  CollectionReference<UsageModel> getUsages(String packageName) {
     final uid = auth.getCurrentUser()?.uid;
     final usagesRef = firestore
         .collection("users")
         .doc(uid)
-        .collection("events")
+        .collection("apps")
+        .doc(packageName)
+        .collection("usages")
         .withConverter<UsageModel>(
           fromFirestore: (snapshot, _) => UsageModel.fromJson(snapshot.data()!),
           toFirestore: (usageModel, _) => usageModel.toJson(),

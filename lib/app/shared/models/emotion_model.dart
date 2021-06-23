@@ -15,6 +15,16 @@ enum EmotionStatus {
   Frustrado
 }
 
+T enumFromString<T>(Iterable<T> values, String value) {
+  return values.firstWhere((type) => type.toString().split(".").last == value);
+}
+
+extension ParseToString on EmotionStatus {
+  String toShortString() {
+    return this.toString().split('.').last;
+  }
+}
+
 class EmotionModel {
   EmotionStatus emotionStatus;
   String timeStamp;
@@ -30,7 +40,8 @@ class EmotionModel {
 
   EmotionModel.fromJson(Map<String, Object?> json)
       : this(
-          emotionStatus: json['emotionStatus']! as EmotionStatus,
+          emotionStatus: enumFromString(
+              EmotionStatus.values, json['emotionStatus']! as String),
           timeStamp: json['timeStamp']! as String,
           exposedContent: json['exposedContent']! as String,
           thoughts: json['thoughts']! as String,

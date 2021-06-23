@@ -40,7 +40,7 @@ class ConfigDatabaseRepository implements IConfigsDatabaseRepository {
     final configRef = firestore
         .collection("users")
         .doc(uid)
-        .collection("events")
+        .collection("configs")
         .withConverter<ConfigModel>(
           fromFirestore: (snapshot, _) =>
               ConfigModel.fromJson(snapshot.data()!),

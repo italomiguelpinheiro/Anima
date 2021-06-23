@@ -39,15 +39,79 @@ mixin _$DatabaseController on _DatabaseControllerBase, Store {
     return _$addUsageAsyncAction.run(() => super.addUsage(usageInfoList));
   }
 
+  final _$addEmotionAsyncAction =
+      AsyncAction('_DatabaseControllerBase.addEmotion');
+
+  @override
+  Future<void> addEmotion(String packageName, EmotionStatus emotionStatus,
+      String timeStamp, String exposedContent, String thoughts) {
+    return _$addEmotionAsyncAction.run(() => super.addEmotion(
+        packageName, emotionStatus, timeStamp, exposedContent, thoughts));
+  }
+
+  final _$addConfigsAsyncAction =
+      AsyncAction('_DatabaseControllerBase.addConfigs');
+
+  @override
+  Future<void> addConfigs(
+      bool nudgets,
+      bool emotions,
+      bool confrontation,
+      bool googleCalendar,
+      bool challengesTotalReduction,
+      bool challengesDowntimeApp) {
+    return _$addConfigsAsyncAction.run(() => super.addConfigs(
+        nudgets,
+        emotions,
+        confrontation,
+        googleCalendar,
+        challengesTotalReduction,
+        challengesDowntimeApp));
+  }
+
   final _$_DatabaseControllerBaseActionController =
       ActionController(name: '_DatabaseControllerBase');
 
   @override
-  CollectionReference<EventModel> getEvents() {
+  CollectionReference<EventModel> getEvents(
+      String packageName, String eventType) {
     final _$actionInfo = _$_DatabaseControllerBaseActionController.startAction(
         name: '_DatabaseControllerBase.getEvents');
     try {
-      return super.getEvents();
+      return super.getEvents(packageName, eventType);
+    } finally {
+      _$_DatabaseControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  CollectionReference<UsageModel> getUsages(String packageName) {
+    final _$actionInfo = _$_DatabaseControllerBaseActionController.startAction(
+        name: '_DatabaseControllerBase.getUsages');
+    try {
+      return super.getUsages(packageName);
+    } finally {
+      _$_DatabaseControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  CollectionReference<EmotionModel> getEmotions(String packageName) {
+    final _$actionInfo = _$_DatabaseControllerBaseActionController.startAction(
+        name: '_DatabaseControllerBase.getEmotions');
+    try {
+      return super.getEmotions(packageName);
+    } finally {
+      _$_DatabaseControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  CollectionReference<ConfigModel> getConfigs() {
+    final _$actionInfo = _$_DatabaseControllerBaseActionController.startAction(
+        name: '_DatabaseControllerBase.getConfigs');
+    try {
+      return super.getConfigs();
     } finally {
       _$_DatabaseControllerBaseActionController.endAction(_$actionInfo);
     }

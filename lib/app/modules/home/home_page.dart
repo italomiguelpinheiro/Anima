@@ -48,7 +48,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           children: <Widget>[
             Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.4,
+              height: MediaQuery.of(context).size.height * 0.6,
               decoration: BoxDecoration(
                 color: Color(0xff2CB289),
                 borderRadius: BorderRadius.only(
@@ -74,7 +74,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       child: Text("ADD USAGE")),
                   RaisedButton(
                       onPressed: () {
-                        controller.getEvent();
+                        controller.getUsage();
                       },
                       child: Text("GET USAGE")),
                   RaisedButton(
@@ -84,9 +84,19 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       child: Text("ADD EMOTION")),
                   RaisedButton(
                       onPressed: () {
+                        controller.getEmotions();
+                      },
+                      child: Text("GET EMOTION")),
+                  RaisedButton(
+                      onPressed: () {
                         controller.addConfig();
                       },
                       child: Text("ADD CONFIG")),
+                  RaisedButton(
+                      onPressed: () {
+                        controller.getConfigs();
+                      },
+                      child: Text("GET CONFIG")),
                 ],
               ),
             ),

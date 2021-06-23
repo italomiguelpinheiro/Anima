@@ -27,7 +27,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   final _$getEventAsyncAction = AsyncAction('_HomeControllerBase.getEvent');
 
   @override
-  Future getEvent() {
+  Future<void> getEvent() {
     return _$getEventAsyncAction.run(() => super.getEvent());
   }
 
@@ -62,6 +62,61 @@ mixin _$HomeController on _HomeControllerBase, Store {
         name: '_HomeControllerBase.addUsage');
     try {
       return super.addUsage(usageInfoList);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void getUsage() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.getUsage');
+    try {
+      return super.getUsage();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addEmotion() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.addEmotion');
+    try {
+      return super.addEmotion();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void getEmotions() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.getEmotions');
+    try {
+      return super.getEmotions();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addConfig() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.addConfig');
+    try {
+      return super.addConfig();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void getConfigs() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.getConfigs');
+    try {
+      return super.getConfigs();
     } finally {
       _$_HomeControllerBaseActionController.endAction(_$actionInfo);
     }

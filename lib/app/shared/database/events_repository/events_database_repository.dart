@@ -35,12 +35,18 @@ class EventsDatabaseRepository implements IEventsDatabaseRepository {
   }
 
   @override
-  CollectionReference<EventModel> getEvents() {
+  CollectionReference<EventModel> getEvents(
+      String packageName, String eventType) {
+    print(packageName);
     final uid = auth.getCurrentUser()?.uid;
     final eventRef = firestore
         .collection("users")
         .doc(uid)
+        .collection("apps")
+        .doc(packageName)
         .collection("events")
+        .doc(eventType)
+        .collection("event")
         .withConverter<EventModel>(
           fromFirestore: (snapshot, _) => EventModel.fromJson(snapshot.data()!),
           toFirestore: (eventModel, _) => eventModel.toJson(),

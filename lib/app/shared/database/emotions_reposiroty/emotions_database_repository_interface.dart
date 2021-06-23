@@ -5,5 +5,5 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 abstract class IEmotionsDatabaseRepository {
   Future<void> addEmotions(String packageName, EmotionStatus emotionStatus,
       String timeStamp, String exposedContent, String thoughts);
-  CollectionReference<EmotionModel> getEmotions();
+  CollectionReference<EmotionModel> getEmotions(String packageName);
 }
