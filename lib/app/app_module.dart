@@ -34,14 +34,13 @@ import 'shared/database/usage_reposiroty/usage_database_repository_interface.dar
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
-
         Bind((i) => AppController()),
         Bind((i) => AuthController()),
         Bind((i) => LoginController()),
         Bind((i) => HomeController()),
         Bind((i) => EmotionController()),
-    Bind((i) => ContentController()),
-    Bind((i) => ReminderController()),
+        Bind((i) => ContentController()),
+        Bind((i) => ReminderController()),
         Bind<IAuthRepository>((i) => AuthRepository()),
         Bind((i) => DatabaseController()),
         Bind<IEventsDatabaseRepository>(
@@ -55,10 +54,6 @@ class AppModule extends MainModule {
         //Bind((i) => LocalStorageHive()),
       ];
 
-    //Bind((i) => LocalStorageHive()),
-  ];
-
-
   @override
   List<ModularRouter> get routers => [
         ModularRouter(Modular.initialRoute, child: (i, args) => SplashPage()),
@@ -67,7 +62,6 @@ class AppModule extends MainModule {
         ModularRouter('/emotion', child: (i, args) => EmotionPage()),
         ModularRouter('/content', child: (i, args) => ContentPage()),
         ModularRouter('/remider', child: (i, args) => ReminderPage()),
-       
       ];
 
   @override
