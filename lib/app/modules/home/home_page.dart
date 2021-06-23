@@ -57,14 +57,26 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               ),
               child: Column(
                 children: [
-                  RaisedButton(onPressed: () {
-                    controller.addEvent(events);
-                  }),
+                  RaisedButton(
+                      onPressed: () {
+                        controller.addEvent(events);
+                      },
+                      child: Text("ADD EVENTS")),
                   RaisedButton(
                       onPressed: () {
                         controller.getEvent();
                       },
-                      child: Text("GET"))
+                      child: Text("GET EVENTS")),
+                  RaisedButton(
+                      onPressed: () {
+                        controller.addUsage(usage);
+                      },
+                      child: Text("ADD USAGE")),
+                  RaisedButton(
+                      onPressed: () {
+                        controller.getEvent();
+                      },
+                      child: Text("GET USAGE")),
                 ],
               ),
             ),

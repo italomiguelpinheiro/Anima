@@ -3,15 +3,11 @@ import 'package:anima/app/modules/home/home_controller.dart';
 import 'package:anima/app/modules/home/home_module.dart';
 import 'package:anima/app/modules/home/home_page.dart';
 import 'package:anima/app/modules/login/login_controller.dart';
-import 'package:anima/app/modules/login/login_module.dart';
 import 'package:anima/app/modules/login/login_page.dart';
 import 'package:anima/app/modules/splash/splash_page.dart';
 import 'package:anima/app/shared/auth/repository/auth_repository.dart';
-import 'package:anima/app/shared/auth/repository/dio_repository.dart';
 import 'package:anima/app/shared/auth/auth_controller.dart';
 import 'package:anima/app/shared/database/database_controller.dart';
-import 'package:anima/app/shared/database/repository/database_repository.dart';
-import 'package:anima/app/shared/database/repository/database_repository_interface.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,6 +15,10 @@ import 'package:flutter/material.dart';
 import 'package:anima/app/app_widget.dart';
 
 import 'shared/auth/repository/auth_repository_interface.dart';
+import 'shared/database/events_repository/events_database_repository.dart';
+import 'shared/database/events_repository/events_database_repository_interface.dart';
+import 'shared/database/usage_reposiroty/usage_database_repository.dart';
+import 'shared/database/usage_reposiroty/usage_database_repository_interface.dart';
 
 class AppModule extends MainModule {
   @override
@@ -28,8 +28,10 @@ class AppModule extends MainModule {
         Bind((i) => LoginController()),
         Bind((i) => HomeController()),
         Bind((i) => DatabaseController()),
-        Bind<IDatabaseRepository>(
-            (i) => DatabaseRepository(FirebaseFirestore.instance)),
+        Bind<IEventsDatabaseRepository>(
+            (i) => EventsDatabaseRepository(FirebaseFirestore.instance)),
+        Bind<IUsageDatabaseRepository>(
+            (i) => UsageDatabaseRepository(FirebaseFirestore.instance)),
         Bind<IAuthRepository>((i) => AuthRepository()),
         //Bind((i) => LocalStorageHive()),
       ];

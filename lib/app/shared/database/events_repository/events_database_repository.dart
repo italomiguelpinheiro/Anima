@@ -1,15 +1,15 @@
 import 'package:anima/app/shared/auth/auth_controller.dart';
-import 'package:anima/app/shared/database/repository/database_repository_interface.dart';
 import 'package:anima/app/shared/models/event_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class DatabaseRepository implements IDatabaseRepository {
+import 'events_database_repository_interface.dart';
+
+class EventsDatabaseRepository implements IEventsDatabaseRepository {
   final FirebaseFirestore firestore;
   final AuthController auth = Modular.get();
 
-  DatabaseRepository(this.firestore);
+  EventsDatabaseRepository(this.firestore);
 
   @override
   Future<void> addEvent(String eventType, String timeStamp, String packageName,

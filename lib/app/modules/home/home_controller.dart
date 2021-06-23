@@ -37,12 +37,17 @@ abstract class _HomeControllerBase with Store {
   }
 
   @action
-  void getEvent() async {
+  Future<void> getEvent() async {
     List<QueryDocumentSnapshot<EventModel>> events =
         await db.getEvents().get().then((snapshot) => snapshot.docs);
 
     events.forEach((element) {
       print(element.toString());
     });
+  }
+
+  @action
+  void addUsage(List<UsageInfo> usageInfoList) {
+    db.addUsage(usageInfoList);
   }
 }

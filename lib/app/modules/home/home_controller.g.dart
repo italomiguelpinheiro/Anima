@@ -24,6 +24,13 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$getEventAsyncAction = AsyncAction('_HomeControllerBase.getEvent');
+
+  @override
+  Future getEvent() {
+    return _$getEventAsyncAction.run(() => super.getEvent());
+  }
+
   final _$_HomeControllerBaseActionController =
       ActionController(name: '_HomeControllerBase');
 
@@ -50,11 +57,11 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
-  void getEvent() {
+  void addUsage(List<UsageInfo> usageInfoList) {
     final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
-        name: '_HomeControllerBase.getEvent');
+        name: '_HomeControllerBase.addUsage');
     try {
-      return super.getEvent();
+      return super.addUsage(usageInfoList);
     } finally {
       _$_HomeControllerBaseActionController.endAction(_$actionInfo);
     }

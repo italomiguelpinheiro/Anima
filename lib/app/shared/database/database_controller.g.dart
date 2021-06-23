@@ -28,8 +28,15 @@ mixin _$DatabaseController on _DatabaseControllerBase, Store {
       AsyncAction('_DatabaseControllerBase.addEvents');
 
   @override
-  Future addEvents(List<EventUsageInfo> usageInfoList) {
+  Future<void> addEvents(List<EventUsageInfo> usageInfoList) {
     return _$addEventsAsyncAction.run(() => super.addEvents(usageInfoList));
+  }
+
+  final _$addUsageAsyncAction = AsyncAction('_DatabaseControllerBase.addUsage');
+
+  @override
+  Future<void> addUsage(List<UsageInfo> usageInfoList) {
+    return _$addUsageAsyncAction.run(() => super.addUsage(usageInfoList));
   }
 
   final _$_DatabaseControllerBaseActionController =
