@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -17,7 +16,7 @@ class _SplashPageState extends State<SplashPage> {
     return SafeArea(
       child: Container(
         decoration: BoxDecoration(color: Color(0xffCDEAE3)),
-        child: Column(
+        child: ListView(
           children: [
             SizedBox(
               height: 100,
@@ -31,10 +30,14 @@ class _SplashPageState extends State<SplashPage> {
               children: [
                 FlatButton(
                     height: 50,
-                    minWidth: 145,
+                    minWidth: MediaQuery.of(context).size.width * 0.4,
                     color: Color(0xff2CB289),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                    child: Text("Entrar", style: TextStyle(color: Colors.white),),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Text(
+                      "Entrar",
+                      style: TextStyle(color: Colors.white),
+                    ),
                     onPressed: () {
                       Modular.to.pushReplacementNamed('/login');
                     }),
@@ -42,7 +45,8 @@ class _SplashPageState extends State<SplashPage> {
                     height: 50,
                     minWidth: 145,
                     color: Colors.white,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
                     child: Text("Cadastre-se"),
                     onPressed: () {}),
               ],
@@ -51,7 +55,7 @@ class _SplashPageState extends State<SplashPage> {
               height: 20,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 33.0, right: 33),
+              padding: const EdgeInsets.only(left: 30.0, right: 30),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: GestureDetector(
@@ -68,8 +72,9 @@ class _SplashPageState extends State<SplashPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            
-                            Image.asset("assets/splash/google.png",),
+                            Image.asset(
+                              "assets/splash/google.png",
+                            ),
                             SizedBox(width: 20),
                             Text(
                               "Continuar com Gmail",
@@ -85,7 +90,8 @@ class _SplashPageState extends State<SplashPage> {
                   ),
                 ),
               ),
-            )
+            ),
+            SizedBox(height: 70)
           ],
         ),
       ),
