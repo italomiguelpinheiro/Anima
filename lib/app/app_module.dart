@@ -8,6 +8,8 @@ import 'package:anima/app/modules/splash/splash_page.dart';
 import 'package:anima/app/shared/auth/repository/auth_repository.dart';
 import 'package:anima/app/shared/auth/auth_controller.dart';
 import 'package:anima/app/shared/database/database_controller.dart';
+import 'package:anima/app/shared/database/emotions_reposiroty/emotions_database_repository.dart';
+import 'package:anima/app/shared/database/emotions_reposiroty/emotions_database_repository_interface.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter_modular/flutter_modular.dart';
@@ -33,6 +35,8 @@ class AppModule extends MainModule {
         Bind<IUsageDatabaseRepository>(
             (i) => UsageDatabaseRepository(FirebaseFirestore.instance)),
         Bind<IAuthRepository>((i) => AuthRepository()),
+        Bind<IEmotionsDatabaseRepository>(
+            (i) => EmotionsDatabaseRepository(FirebaseFirestore.instance)),
         //Bind((i) => LocalStorageHive()),
       ];
 

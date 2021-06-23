@@ -20,13 +20,13 @@ class UsageDatabaseRepository implements IUsageDatabaseRepository {
     String totalTimeInForeground,
   ) {
     final uid = auth.getCurrentUser()?.uid;
-    CollectionReference events = firestore
+    CollectionReference usages = firestore
         .collection('users')
         .doc(uid)
         .collection("apps")
         .doc(packageName)
         .collection("usages");
-    return events
+    return usages
         .add({
           'firstTimeStamp': firstTimeStamp,
           'lastTimeStamp': lastTimeStamp,
@@ -41,7 +41,7 @@ class UsageDatabaseRepository implements IUsageDatabaseRepository {
   @override
   CollectionReference<UsageModel> getUsages() {
     final uid = auth.getCurrentUser()?.uid;
-    final eventRef = firestore
+    final usagesRef = firestore
         .collection("users")
         .doc(uid)
         .collection("events")
@@ -49,6 +49,6 @@ class UsageDatabaseRepository implements IUsageDatabaseRepository {
           fromFirestore: (snapshot, _) => UsageModel.fromJson(snapshot.data()!),
           toFirestore: (usageModel, _) => usageModel.toJson(),
         );
-    return eventRef;
+    return usagesRef;
   }
 }

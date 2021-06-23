@@ -1,5 +1,6 @@
 import 'package:anima/app/shared/auth/auth_controller.dart';
 import 'package:anima/app/shared/database/database_controller.dart';
+import 'package:anima/app/shared/models/emotions_model.dart';
 import 'package:anima/app/shared/models/event_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mobx/mobx.dart';
@@ -49,5 +50,16 @@ abstract class _HomeControllerBase with Store {
   @action
   void addUsage(List<UsageInfo> usageInfoList) {
     db.addUsage(usageInfoList);
+  }
+
+  @action
+  void addEmotion() {
+    db.addEmotion("com.example.anima", EmotionStatus.Alegre,
+        new DateTime.now().toString(), "exposedContent", "thoughts");
+  }
+
+  @action
+  void addConfig() {
+    // db.addEmotion(EmotionStatus.Alegre, "com.example.anima");
   }
 }

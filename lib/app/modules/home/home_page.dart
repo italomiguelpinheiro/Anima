@@ -77,6 +77,16 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                         controller.getEvent();
                       },
                       child: Text("GET USAGE")),
+                  RaisedButton(
+                      onPressed: () {
+                        controller.addEmotion();
+                      },
+                      child: Text("ADD EMOTION")),
+                  RaisedButton(
+                      onPressed: () {
+                        controller.addConfig();
+                      },
+                      child: Text("ADD CONFIG")),
                 ],
               ),
             ),
