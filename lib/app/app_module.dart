@@ -1,12 +1,13 @@
 import 'package:anima/app/app_controller.dart';
 import 'package:anima/app/modules/home/home_controller.dart';
-import 'package:anima/app/modules/home/home_module.dart';
 import 'package:anima/app/modules/home/home_page.dart';
 import 'package:anima/app/modules/login/login_controller.dart';
 import 'package:anima/app/modules/login/login_page.dart';
 import 'package:anima/app/modules/splash/splash_page.dart';
 import 'package:anima/app/shared/auth/repository/auth_repository.dart';
 import 'package:anima/app/shared/auth/auth_controller.dart';
+import 'package:anima/app/shared/database/configs_reposiroty/configs_database_repository.dart';
+import 'package:anima/app/shared/database/configs_reposiroty/configs_database_repository_interface.dart';
 import 'package:anima/app/shared/database/database_controller.dart';
 import 'package:anima/app/shared/database/emotions_reposiroty/emotions_database_repository.dart';
 import 'package:anima/app/shared/database/emotions_reposiroty/emotions_database_repository_interface.dart';
@@ -37,6 +38,8 @@ class AppModule extends MainModule {
         Bind<IAuthRepository>((i) => AuthRepository()),
         Bind<IEmotionsDatabaseRepository>(
             (i) => EmotionsDatabaseRepository(FirebaseFirestore.instance)),
+        Bind<IConfigsDatabaseRepository>(
+            (i) => ConfigDatabaseRepository(FirebaseFirestore.instance)),
         //Bind((i) => LocalStorageHive()),
       ];
 

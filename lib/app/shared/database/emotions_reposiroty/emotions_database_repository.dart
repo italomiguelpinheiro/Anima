@@ -34,16 +34,16 @@ class EmotionsDatabaseRepository implements IEmotionsDatabaseRepository {
   }
 
   @override
-  CollectionReference<EmotionsModel> getEmotions() {
+  CollectionReference<EmotionModel> getEmotions() {
     final uid = auth.getCurrentUser()?.uid;
     final emotionRef = firestore
         .collection("users")
         .doc(uid)
         .collection("events")
-        .withConverter<EmotionsModel>(
+        .withConverter<EmotionModel>(
           fromFirestore: (snapshot, _) =>
-              EmotionsModel.fromJson(snapshot.data()!),
-          toFirestore: (emotionsModel, _) => emotionsModel.toJson(),
+              EmotionModel.fromJson(snapshot.data()!),
+          toFirestore: (emotionModel, _) => emotionModel.toJson(),
         );
     return emotionRef;
   }

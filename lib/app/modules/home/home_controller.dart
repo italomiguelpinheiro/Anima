@@ -60,6 +60,6 @@ abstract class _HomeControllerBase with Store {
 
   @action
   void addConfig() {
-    // db.addEmotion(EmotionStatus.Alegre, "com.example.anima");
+    db.addConfigs(true, false, false, false, false, false);
   }
 }

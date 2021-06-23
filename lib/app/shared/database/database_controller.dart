@@ -1,3 +1,4 @@
+import 'package:anima/app/shared/database/configs_reposiroty/configs_database_repository_interface.dart';
 import 'package:anima/app/shared/models/emotion_model.dart';
 import 'package:anima/app/shared/models/event_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,6 +18,7 @@ abstract class _DatabaseControllerBase with Store {
   final IEventsDatabaseRepository _eventsDatabaseRepository = Modular.get();
   final IUsageDatabaseRepository _usageDatabaseRepository = Modular.get();
   final IEmotionsDatabaseRepository _emotionDatabaseRepository = Modular.get();
+  final IConfigsDatabaseRepository _configDatabaseRepository = Modular.get();
 
   @observable
   SyncStatus status = SyncStatus.loading;
@@ -55,6 +57,18 @@ abstract class _DatabaseControllerBase with Store {
       String timeStamp, String exposedContent, String thoughts) async {
     await _emotionDatabaseRepository.addEmotions(
         packageName, emotionStatus, timeStamp, exposedContent, thoughts);
+  }
+
+  @action
+  Future<void> addConfigs(
+      bool nudgets,
+      bool emotions,
+      bool confrontation,
+      bool googleCalendar,
+      bool challengesTotalReduction,
+      bool challengesDowntimeApp) async {
+    await _configDatabaseRepository.addConfigs(nudgets, emotions, confrontation,
+        googleCalendar, challengesTotalReduction, challengesDowntimeApp);
   }
 }
 
