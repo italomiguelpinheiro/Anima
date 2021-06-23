@@ -93,6 +93,17 @@ mixin _$AuthController on _AuthControllerBase, Store {
   }
 
   @override
+  User? getCurrentUser() {
+    final _$actionInfo = _$_AuthControllerBaseActionController.startAction(
+        name: '_AuthControllerBase.getCurrentUser');
+    try {
+      return super.getCurrentUser();
+    } finally {
+      _$_AuthControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 status: ${status},
