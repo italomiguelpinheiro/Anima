@@ -15,20 +15,20 @@ enum EmotionStatus {
   Frustrado
 }
 
-class EmotionsModel {
+class EmotionModel {
   EmotionStatus emotionStatus;
   String timeStamp;
   String exposedContent;
   String thoughts;
 
-  EmotionsModel({
+  EmotionModel({
     required this.emotionStatus,
     required this.timeStamp,
     required this.exposedContent,
     required this.thoughts,
   });
 
-  EmotionsModel.fromJson(Map<String, Object?> json)
+  EmotionModel.fromJson(Map<String, Object?> json)
       : this(
           emotionStatus: json['emotionStatus']! as EmotionStatus,
           timeStamp: json['timeStamp']! as String,
@@ -45,8 +45,8 @@ class EmotionsModel {
     };
   }
 
-  factory EmotionsModel.fromDocmuents(DocumentSnapshot documentSnapshot) {
-    return EmotionsModel(
+  factory EmotionModel.fromDocmuents(DocumentSnapshot documentSnapshot) {
+    return EmotionModel(
       emotionStatus: documentSnapshot['emotionStatus'],
       timeStamp: documentSnapshot['emotionStatus'],
       exposedContent: documentSnapshot['emotionStatus'],

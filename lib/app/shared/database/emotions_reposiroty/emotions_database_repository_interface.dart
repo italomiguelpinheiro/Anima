@@ -1,4 +1,4 @@
-import 'package:anima/app/shared/models/emotions_model.dart';
+import 'package:anima/app/shared/models/emotion_model.dart';
 import 'package:anima/app/shared/models/usage_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

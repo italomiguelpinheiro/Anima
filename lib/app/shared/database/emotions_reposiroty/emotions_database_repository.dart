@@ -1,5 +1,5 @@
 import 'package:anima/app/shared/auth/auth_controller.dart';
-import 'package:anima/app/shared/models/emotions_model.dart';
+import 'package:anima/app/shared/models/emotion_model.dart';
 import 'package:anima/app/shared/models/usage_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';

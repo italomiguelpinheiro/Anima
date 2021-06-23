@@ -1,6 +1,6 @@
 import 'package:anima/app/shared/auth/auth_controller.dart';
 import 'package:anima/app/shared/database/database_controller.dart';
-import 'package:anima/app/shared/models/emotions_model.dart';
+import 'package:anima/app/shared/models/emotion_model.dart';
 import 'package:anima/app/shared/models/event_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mobx/mobx.dart';
