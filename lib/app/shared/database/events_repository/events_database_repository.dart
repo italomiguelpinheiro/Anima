@@ -15,8 +15,14 @@ class EventsDatabaseRepository implements IEventsDatabaseRepository {
   Future<void> addEvent(String eventType, String timeStamp, String packageName,
       String className) {
     final uid = auth.getCurrentUser()?.uid;
-    CollectionReference events =
-        firestore.collection('users').doc(uid).collection("events");
+    CollectionReference events = firestore
+        .collection('users')
+        .doc(uid)
+        .collection("apps")
+        .doc(packageName)
+        .collection("events")
+        .doc(eventType)
+        .collection("event");
     return events
         .add({
           'eventType': eventType,

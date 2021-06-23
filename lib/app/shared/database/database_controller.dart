@@ -26,20 +26,24 @@ abstract class _DatabaseControllerBase with Store {
   @action
   Future<void> addEvents(List<EventUsageInfo> usageInfoList) async {
     usageInfoList.forEach((element) async {
-      await _eventsDatabaseRepository.addEvent(element.eventType,
-          element.timeStamp, element.packageName, element.className);
+      if (!element.packageName.contains("android")) {
+        await _eventsDatabaseRepository.addEvent(element.eventType,
+            element.timeStamp, element.packageName, element.className);
+      }
     });
   }
 
   @action
   Future<void> addUsage(List<UsageInfo> usageInfoList) async {
     usageInfoList.forEach((element) async {
-      await _usageDatabaseRepository.addUsage(
-          element.firstTimeStamp,
-          element.lastTimeStamp,
-          element.packageName,
-          element.lastTimeUsed,
-          element.totalTimeInForeground);
+      if (!element.packageName.contains("android")) {
+        await _usageDatabaseRepository.addUsage(
+            element.firstTimeStamp,
+            element.lastTimeStamp,
+            element.packageName,
+            element.lastTimeUsed,
+            element.totalTimeInForeground);
+      }
     });
   }
 }

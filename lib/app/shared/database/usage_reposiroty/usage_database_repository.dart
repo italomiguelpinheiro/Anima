@@ -20,8 +20,12 @@ class UsageDatabaseRepository implements IUsageDatabaseRepository {
     String totalTimeInForeground,
   ) {
     final uid = auth.getCurrentUser()?.uid;
-    CollectionReference events =
-        firestore.collection('users').doc(uid).collection("usages");
+    CollectionReference events = firestore
+        .collection('users')
+        .doc(uid)
+        .collection("apps")
+        .doc(packageName)
+        .collection("usages");
     return events
         .add({
           'firstTimeStamp': firstTimeStamp,
