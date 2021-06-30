@@ -46,7 +46,7 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
       child: Scaffold(
         appBar: null,
         body: SingleChildScrollView(
-                  child: Container(
+          child: Container(
             child: Column(
               children: <Widget>[
                 Container(
@@ -65,7 +65,7 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
                         bottomLeft: Radius.circular(20)),
                   ),
                   child: SingleChildScrollView(
-                                      child: Column(
+                    child: Column(
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,12 +92,17 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
                             Row(
                               children: [
                                 IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      controller.getEvent();
+                                    },
                                     icon: Icon(Icons.calendar_today_rounded,
                                         color: Colors.white)),
                                 IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.person, color: Colors.white)),
+                                    onPressed: () {
+                                      controller.getAccess();
+                                    },
+                                    icon: Icon(Icons.person,
+                                        color: Colors.white)),
                               ],
                             ),
                           ],
@@ -117,12 +122,14 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
                                   Text(
                                     "12h",
                                     style: TextStyle(
-                                        fontSize: 40, fontWeight: FontWeight.bold),
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     "30min",
                                     style: TextStyle(
-                                        fontSize: 23, fontWeight: FontWeight.bold),
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -172,7 +179,6 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * 0.41,
                         child: ListView.builder(
-
                             itemBuilder: (context, index) {
                               List<String> titleList =
                                   events[index].packageName.split(".");

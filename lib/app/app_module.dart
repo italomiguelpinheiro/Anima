@@ -26,6 +26,8 @@ import 'package:flutter/material.dart';
 import 'package:anima/app/app_widget.dart';
 
 import 'shared/auth/repository/auth_repository_interface.dart';
+import 'shared/database/access_repository/access_database_repository.dart';
+import 'shared/database/access_repository/access_database_repository_interface.dart';
 import 'shared/database/events_repository/events_database_repository.dart';
 import 'shared/database/events_repository/events_database_repository_interface.dart';
 import 'shared/database/usage_reposiroty/usage_database_repository.dart';
@@ -51,6 +53,8 @@ class AppModule extends MainModule {
             (i) => EmotionsDatabaseRepository(FirebaseFirestore.instance)),
         Bind<IConfigsDatabaseRepository>(
             (i) => ConfigDatabaseRepository(FirebaseFirestore.instance)),
+        Bind<IAccessDatabaseRepository>(
+            (i) => AccessDatabaseRepository(FirebaseFirestore.instance)),
         //Bind((i) => LocalStorageHive()),
       ];
 

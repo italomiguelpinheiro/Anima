@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:anima/app/shared/auth/auth_controller.dart';
 import 'package:anima/app/shared/database/database_controller.dart';
+import 'package:anima/app/shared/models/access_model.dart';
 import 'package:anima/app/shared/models/config_model.dart';
 import 'package:anima/app/shared/models/emotion_model.dart';
 import 'package:anima/app/shared/models/event_model.dart';
@@ -32,6 +35,28 @@ abstract class _HomeControllerBase with Store {
 
   getToken() async {
     await Modular.get<AuthController>().getToken();
+  }
+
+  @action
+  void addAccess() {
+    db.addAccess();
+  }
+
+  @action
+  void getAccess() {
+    CollectionReference<AccessModel> access = db.getAccess("com.example.anima");
+    access.get().then((value) => value.docs.forEach((element) {
+          print(access);
+          print(new DateTime.fromMillisecondsSinceEpoch(
+              int.parse(element["count"])));
+          var thirtyMinInMls = 1800000;
+          if (int.parse(element["count"]) >= thirtyMinInMls) {
+            print("Acesso longo");
+          } else {
+            print("Acesso curto");
+          }
+          print(element.data().toJson());
+        }));
   }
 
   @action
