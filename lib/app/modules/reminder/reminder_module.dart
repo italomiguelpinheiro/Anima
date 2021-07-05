@@ -14,6 +14,7 @@ class ReminderModule extends ChildModule {
   @override
   List<ModularRouter> get routers => [
         ModularRouter(Modular.initialRoute, child: (_, args) => ReminderPage()),
+        
         ModularRouter('/challenge', child: (i, args) => ChallengePage())
       ];
 

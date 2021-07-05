@@ -1,20 +1,19 @@
 import 'package:anima/app/app_controller.dart';
+import 'package:anima/app/modules/sing/sing_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'login_controller.dart';
 
-class LoginPage extends StatefulWidget {
+class SingPage extends StatefulWidget {
   final String title;
-  const LoginPage({Key? key, this.title = "Login"}) : super(key: key);
+  const SingPage({Key? key, this.title = "Login"}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SingPageState createState() => _SingPageState();
 }
 
-class _LoginPageState extends ModularState<LoginPage, LoginController> {
-  
-  final _controller = Modular.get<LoginController>();
+class _SingPageState extends ModularState<SingPage, SingController> {
+  final _controller = Modular.get<SingController>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   var store = Modular.get<AppController>();
@@ -24,7 +23,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-                  child: Container(
+          child: Container(
             child: Padding(
               padding: const EdgeInsets.all(30.0),
               child: Column(
@@ -45,13 +44,13 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                   ),
                   SizedBox(height: 60),
                   Text(
-                    "Entrar",
+                    "Crie sua conta",
                     style: TextStyle(fontSize: 36),
                   ),
                   Row(
                     children: [
                       Text(
-                        "Não tem uma conta?",
+                        "Já tem uma conta?",
                         style: TextStyle(fontSize: 14),
                       ),
                       SizedBox(
@@ -59,10 +58,10 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Modular.to.pushReplacementNamed('/sing-up');
+                          Modular.to.pushReplacementNamed('/login');
                         },
                         child: Text(
-                          "Cadastre-se agora",
+                          "Faça Login",
                           style: TextStyle(
                               fontSize: 14,
                               color: Color(0xff208062),
@@ -72,31 +71,37 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 70),
+                  SizedBox(height: 40),
+                  Text("Nome"),
                   TextFieldContainer(
                     child: TextField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: _emailController ,
+                      keyboardType: TextInputType.text,
+                      controller: _emailController,
                       decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.person,
-                            color: Color(0xff208062),
-                          ),
-                          hintText: "Digite seu login",
+                          hintText: "Digite seu nome",
                           border: InputBorder.none),
                     ),
                   ),
+                  SizedBox(height: 15),
+                  Text("Email"),
+                  TextFieldContainer(
+                    child: TextField(
+                      keyboardType: TextInputType.emailAddress,
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                          hintText: "Digite seu email favorito",
+                          border: InputBorder.none),
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  Text("Senha"),
                   TextFieldContainer(
                     child: TextField(
                       keyboardType: TextInputType.text,
                       controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.lock,
-                            color: Color(0xff208062),
-                          ),
-                          hintText: "Digite sua senha",
+                          hintText: "Crie uma senha",
                           border: InputBorder.none,
                           suffixIcon: Icon(
                             Icons.visibility,
@@ -104,7 +109,23 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                           )),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  Text("Mínimo de 8 caracteres. Combine letras e números.",style: TextStyle(fontSize: 10),),
+                  SizedBox(height: 15),
+                  TextFieldContainer(
+                    child: TextField(
+                      keyboardType: TextInputType.text,
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          hintText: "Digite sua senha novamente",
+                          border: InputBorder.none,
+                          suffixIcon: Icon(
+                            Icons.visibility,
+                            color: Color(0xff208062),
+                          )),
+                    ),
+                  ),
+                  SizedBox(height: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -130,18 +151,17 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
-                       //_controller.authUser(_emailController.text, _passwordController.text).then((data) { store.setUser(data);
-                      onPressed: (){
-                    Modular.to.pushReplacementNamed('/home');
-
-                      }),//controller.loginWithEmailAndPassword),
+                      //_controller.authUser(_emailController.text, _passwordController.text).then((data) { store.setUser(data);
+                      onPressed: () {
+                        Modular.to.pushReplacementNamed('/home');
+                      }), //controller.loginWithEmailAndPassword),
                   SizedBox(height: 20),
                   Center(child: Text("Ou")),
                   SizedBox(height: 20),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: GestureDetector(
-                      onTap: controller.loginWithGoogle,
+                      onTap: () {},
                       child: Container(
                         decoration: BoxDecoration(
                             border: Border.all(color: Color(0xff333131)),

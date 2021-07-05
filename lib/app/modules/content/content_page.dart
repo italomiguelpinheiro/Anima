@@ -1,4 +1,5 @@
 import 'package:anima/app/modules/content/components/content_scroller.dart';
+import 'package:anima/app/modules/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -31,7 +32,7 @@ class _ContentPageState extends ModularState<ContentPage, ContentController> {
                     fontWeight: FontWeight.bold)),
             Text(
               DateTime.now().day.toString() +
-                  " DE JUNHO " +
+                  " DE JULHO " +
                   DateTime.now().year.toString(),
               style: TextStyle(color: Colors.white, fontSize: 12),
             )
@@ -44,7 +45,12 @@ class _ContentPageState extends ModularState<ContentPage, ContentController> {
             padding: EdgeInsets.zero,
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
             icon: Icon(Icons.person_outline_sharp),
             padding: EdgeInsets.zero,
           )
