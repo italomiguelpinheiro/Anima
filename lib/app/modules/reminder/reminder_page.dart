@@ -1,4 +1,6 @@
+import 'package:anima/app/modules/profile/profile_page.dart';
 import 'package:anima/app/modules/reminder/components/custom_switch.dart';
+import 'package:anima/app/modules/reminder/page/apps.dart';
 import 'package:anima/app/modules/reminder/page/challange_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -40,7 +42,12 @@ class _ReminderPageState
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
             icon: Icon(Icons.person_outline_sharp),
             padding: EdgeInsets.zero,
           )
@@ -126,7 +133,21 @@ class _ReminderPageState
                     "Registro de emoções",
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
-                  CrazySwitch()
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => (AppsPage())),
+                          );
+                        },
+                        icon: Icon(Icons.settings, color: Color(0xff2CB289)),
+                      ),
+                      CrazySwitch(),
+                    ],
+                  )
                 ],
               ),
             ),
@@ -153,7 +174,21 @@ class _ReminderPageState
                     "Cartões de enfrentamento",
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
-                  CrazySwitch()
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => (AppsPage())),
+                          );
+                        },
+                        icon: Icon(Icons.settings, color: Color(0xff2CB289)),
+                      ),
+                      CrazySwitch(),
+                    ],
+                  )
                 ],
               ),
             ),
