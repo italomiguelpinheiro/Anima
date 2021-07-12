@@ -4,6 +4,7 @@ import 'package:anima/app/modules/emotion/emotion_page.dart';
 import 'package:anima/app/modules/home/home_controller.dart';
 import 'package:anima/app/modules/home/home_page_view.dart';
 import 'package:anima/app/modules/reminder/reminder_page.dart';
+import 'package:anima/app/modules/report/report_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -20,7 +21,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   
   int _currentIndex = 0;
   final PageStorageBucket bucket = PageStorageBucket();
-  final tabs = [HomePageView(), EmotionPage(), ContentPage(), ReminderPage(), Container()];
+  final tabs = [HomePageView(), EmotionPage(), ContentPage(), ReminderPage(), ReportPage()];
    
 @override
  void initState()  {
@@ -62,7 +63,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             title: Text("Conversa"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.feed_outlined),
             title: Text("Perfil"),
           ),
         ],

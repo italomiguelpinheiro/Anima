@@ -8,9 +8,14 @@ import 'package:anima/app/modules/home/home_page.dart';
 import 'package:anima/app/modules/home/home_page_view.dart';
 import 'package:anima/app/modules/login/login_controller.dart';
 import 'package:anima/app/modules/login/login_page.dart';
+import 'package:anima/app/modules/profile/profile_controller.dart';
 import 'package:anima/app/modules/reminder/page/challange_page.dart';
 import 'package:anima/app/modules/reminder/reminder_controller.dart';
 import 'package:anima/app/modules/reminder/reminder_page.dart';
+import 'package:anima/app/modules/report/report_controller.dart';
+import 'package:anima/app/modules/report/report_page.dart';
+import 'package:anima/app/modules/sing/sing_controller.dart';
+import 'package:anima/app/modules/sing/sing_page.dart';
 import 'package:anima/app/modules/splash/splash_page.dart';
 import 'package:anima/app/shared/auth/repository/auth_repository.dart';
 import 'package:anima/app/shared/auth/auth_controller.dart';
@@ -43,6 +48,9 @@ class AppModule extends MainModule {
         Bind((i) => EmotionController()),
         Bind((i) => ContentController()),
         Bind((i) => ReminderController()),
+        Bind((i) => ReportController()),
+        Bind((i) => ProfileController()),
+        Bind((i) => SingController()),
         Bind<IAuthRepository>((i) => AuthRepository()),
         Bind((i) => DatabaseController()),
         Bind<IEventsDatabaseRepository>(
@@ -62,10 +70,13 @@ class AppModule extends MainModule {
   List<ModularRouter> get routers => [
         ModularRouter(Modular.initialRoute, child: (i, args) => SplashPage()),
         ModularRouter('/login', child: (i, args) => LoginPage()),
+        ModularRouter('/sing-up', child: (i, args) => SingPage()),
         ModularRouter('/home', child: (i, args) => HomePage()),
         ModularRouter('/emotion', child: (i, args) => EmotionPage()),
         ModularRouter('/content', child: (i, args) => ContentPage()),
         ModularRouter('/remider', child: (i, args) => ReminderPage()),
+        ModularRouter('/report', child: (i, args) => ReportPage()),
+
       ];
 
   @override

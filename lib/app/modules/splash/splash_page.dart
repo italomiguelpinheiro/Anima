@@ -21,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
             SizedBox(
               height: 100,
             ),
-            SvgPicture.asset('assets/splash/logoSVG.svg'),
+            SvgPicture.asset('assets/splash/logo.svg'),
             SizedBox(height: 110),
             SvgPicture.asset('assets/splash/guy.svg'),
             SizedBox(height: 110),
@@ -48,7 +48,10 @@ class _SplashPageState extends State<SplashPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
                     child: Text("Cadastre-se"),
-                    onPressed: () {}),
+                    onPressed: () {
+                         Modular.to.pushReplacementNamed('/sing-up');
+
+                    }),
               ],
             ),
             SizedBox(
