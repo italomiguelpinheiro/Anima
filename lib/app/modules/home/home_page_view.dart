@@ -19,34 +19,48 @@ class HomePageView extends StatefulWidget {
 
 class _HomePageViewState extends ModularState<HomePageView, HomeController> {
   //use 'controller' variable to access controller
-
+  
   late List<EventUsageInfo> events;
   late List<UsageInfo> usage;
+
+  
 
   @override
   void initState() {
     initUsage();
     super.initState();
+    
   }
 
   Future<void> initUsage() async {
     UsageStats.grantUsagePermission();
     DateTime endDate = new DateTime.now();
-    DateTime startDate = DateTime(endDate.year, endDate.month, 1, 0, 0, 0);
+    DateTime startDate = DateTime(endDate.year, endDate.month, 15, 0, 0, 0);
 
     List<EventUsageInfo> queryEvents =
         await UsageStats.queryEvents(startDate, endDate);
     List<UsageInfo> usageStats =
         await UsageStats.queryUsageStats(startDate, endDate);
 
+
+  
+
     this.setState(() {
       events = queryEvents.reversed.toList();
       usage = usageStats.reversed.toList();
     });
+
+
   }
 
   @override
   Widget build(BuildContext context) {
+
+    controller.addAccess();
+    controller.getAccess();
+    
+    
+    
     return SafeArea(
       child: Scaffold(
         appBar: null,
@@ -375,7 +389,11 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
           onPressed: () {
             print("presio");
             initUsage();
-            print(events.toString());
+            controller.addEvent(events);
+            controller.addUsage(usage);
+            
+            print("POPULOOU " + controller.acessoCurto.toString());
+            print("POPULOOU " + controller.acessoLongo.toString());
           },
           child: Icon(
             Icons.refresh,

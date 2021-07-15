@@ -21,12 +21,11 @@ abstract class _HomeControllerBase with Store {
   DatabaseController db = Modular.get();
 
   @observable
-  int value = 0;
+  List acessoLongo = [];
 
-  @action
-  void increment() {
-    value++;
-  }
+  @observable
+  List acessoCurto = [];
+
 
   logout() async {
     await Modular.get<AuthController>().logout();
@@ -51,8 +50,10 @@ abstract class _HomeControllerBase with Store {
               int.parse(element["count"])));
           var thirtyMinInMls = 1800000;
           if (int.parse(element["count"]) >= thirtyMinInMls) {
+            acessoLongo.add(element);
             print("Acesso longo");
           } else {
+            acessoCurto.add(element);
             print("Acesso curto");
           }
           print(element.data().toJson());

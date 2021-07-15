@@ -103,25 +103,32 @@ abstract class _DatabaseControllerBase with Store {
 
   @action
   Future<void> addEvents(List<EventUsageInfo> usageInfoList) async {
+    List blacklist = ["com.android", "com.miui", "com.xiaomi"];
     usageInfoList.forEach((element) async {
-      if (!element.packageName.contains("android")) {
-        await _eventsDatabaseRepository.addEvent(element.eventType,
-            element.timeStamp, element.packageName, element.className);
-      }
+      blacklist.forEach((item) async {
+        if (!element.packageName.contains(item)) {
+          await _eventsDatabaseRepository.addEvent(element.eventType,
+              element.timeStamp, element.packageName, element.className);
+        }
+      });
     });
   }
 
   @action
   Future<void> addUsage(List<UsageInfo> usageInfoList) async {
+    List blacklist = ["com.android", "com.miui", "com.xiaomi"];
+
     usageInfoList.forEach((element) async {
-      if (!element.packageName.contains("android")) {
-        await _usageDatabaseRepository.addUsage(
-            element.firstTimeStamp,
-            element.lastTimeStamp,
-            element.packageName,
-            element.lastTimeUsed,
-            element.totalTimeInForeground);
-      }
+      blacklist.forEach((item) async {
+        if (!element.packageName.contains(item)) {
+          await _usageDatabaseRepository.addUsage(
+              element.firstTimeStamp,
+              element.lastTimeStamp,
+              element.packageName,
+              element.lastTimeUsed,
+              element.totalTimeInForeground);
+        }
+      });
     });
   }
 
