@@ -19,17 +19,14 @@ class HomePageView extends StatefulWidget {
 
 class _HomePageViewState extends ModularState<HomePageView, HomeController> {
   //use 'controller' variable to access controller
-  
+
   late List<EventUsageInfo> events;
   late List<UsageInfo> usage;
-
-  
 
   @override
   void initState() {
     initUsage();
     super.initState();
-    
   }
 
   Future<void> initUsage() async {
@@ -42,25 +39,17 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
     List<UsageInfo> usageStats =
         await UsageStats.queryUsageStats(startDate, endDate);
 
-
-  
-
     this.setState(() {
       events = queryEvents.reversed.toList();
       usage = usageStats.reversed.toList();
     });
-
-
   }
 
   @override
   Widget build(BuildContext context) {
+    //controller.addAccess();
+    //controller.getAccess();
 
-    controller.addAccess();
-    controller.getAccess();
-    
-    
-    
     return SafeArea(
       child: Scaffold(
         appBar: null,
@@ -113,7 +102,6 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
                                 ),
                                 Row(
                                   children: [
-                                    
                                     IconButton(
                                         onPressed: () {
                                           Navigator.push(
@@ -317,7 +305,11 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            AppRecord( title: titleList[titleList.length - 1])),
+                                                            AppRecord(
+                                                                title: titleList[
+                                                                    titleList
+                                                                            .length -
+                                                                        1])),
                                                   );
                                                 },
                                                 child: Container(
@@ -388,10 +380,11 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
           backgroundColor: Color(0xff2CB289),
           onPressed: () {
             print("presio");
-            initUsage();
-            controller.addEvent(events);
-            controller.addUsage(usage);
-            
+            //initUsage();
+            //controller.addEvent(events);
+            //controller.addUsage(usage);
+            controller.getAccess(events);
+
             print("POPULOOU " + controller.acessoCurto.toString());
             print("POPULOOU " + controller.acessoLongo.toString());
           },

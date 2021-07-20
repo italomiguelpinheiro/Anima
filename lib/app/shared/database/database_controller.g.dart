@@ -28,8 +28,8 @@ mixin _$DatabaseController on _DatabaseControllerBase, Store {
       AsyncAction('_DatabaseControllerBase.addAccess');
 
   @override
-  Future<void> addAccess() {
-    return _$addAccessAsyncAction.run(() => super.addAccess());
+  Future<void> addAccess(List<EventUsageInfo> usageInfoList) {
+    return _$addAccessAsyncAction.run(() => super.addAccess(usageInfoList));
   }
 
   final _$addEventsAsyncAction =
@@ -81,11 +81,11 @@ mixin _$DatabaseController on _DatabaseControllerBase, Store {
       ActionController(name: '_DatabaseControllerBase');
 
   @override
-  CollectionReference<AccessModel> getAccess(String packageName) {
+  Future<List<AccessModel>> getAccess(List<EventUsageInfo> usageInfoList) {
     final _$actionInfo = _$_DatabaseControllerBaseActionController.startAction(
         name: '_DatabaseControllerBase.getAccess');
     try {
-      return super.getAccess(packageName);
+      return super.getAccess(usageInfoList);
     } finally {
       _$_DatabaseControllerBaseActionController.endAction(_$actionInfo);
     }

@@ -50,22 +50,22 @@ mixin _$HomeController on _HomeControllerBase, Store {
       ActionController(name: '_HomeControllerBase');
 
   @override
-  void addAccess() {
+  void addAccess(List<EventUsageInfo> eventUsageList) {
     final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
         name: '_HomeControllerBase.addAccess');
     try {
-      return super.addAccess();
+      return super.addAccess(eventUsageList);
     } finally {
       _$_HomeControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void getAccess() {
+  Future<List<AccessModel>> getAccess(List<EventUsageInfo> eventUsageList) {
     final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
         name: '_HomeControllerBase.getAccess');
     try {
-      return super.getAccess();
+      return super.getAccess(eventUsageList);
     } finally {
       _$_HomeControllerBaseActionController.endAction(_$actionInfo);
     }
