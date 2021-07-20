@@ -39,6 +39,13 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$getAccessAsyncAction = AsyncAction('_HomeControllerBase.getAccess');
+
+  @override
+  Future<List<AccessModel>> getAccess(List<EventUsageInfo> eventUsageList) {
+    return _$getAccessAsyncAction.run(() => super.getAccess(eventUsageList));
+  }
+
   final _$getEventAsyncAction = AsyncAction('_HomeControllerBase.getEvent');
 
   @override
@@ -55,17 +62,6 @@ mixin _$HomeController on _HomeControllerBase, Store {
         name: '_HomeControllerBase.addAccess');
     try {
       return super.addAccess(eventUsageList);
-    } finally {
-      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<List<AccessModel>> getAccess(List<EventUsageInfo> eventUsageList) {
-    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
-        name: '_HomeControllerBase.getAccess');
-    try {
-      return super.getAccess(eventUsageList);
     } finally {
       _$_HomeControllerBaseActionController.endAction(_$actionInfo);
     }

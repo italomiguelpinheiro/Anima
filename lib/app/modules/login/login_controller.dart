@@ -8,7 +8,6 @@ part 'login_controller.g.dart';
 class LoginController = _LoginControllerBase with _$LoginController;
 
 abstract class _LoginControllerBase with Store {
-  
   AuthController auth = Modular.get();
 
   @observable
@@ -17,7 +16,7 @@ abstract class _LoginControllerBase with Store {
   @observable
   int value = 0;
 
-@action
+  @action
   Future loginWithGoogle() async {
     try {
       loading = true;
@@ -29,10 +28,10 @@ abstract class _LoginControllerBase with Store {
   }
 
   @action
-  Future loginWithEmailAndPassword() async {
+  Future loginWithEmailAndPassword(String email, String password) async {
     try {
       loading = true;
-      await auth.loginWithEmailAndPassword();
+      await auth.loginWithEmailAndPassword(email, password);
       Modular.to.pushReplacementNamed('/home');
     } catch (e) {
       loading = false;

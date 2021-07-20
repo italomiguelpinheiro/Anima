@@ -10,12 +10,13 @@ class AuthRepository implements IAuthRepository {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
   @override
-  Future<UserCredential?> getEmailPasswordLogin() async {
+  Future<UserCredential?> getEmailPasswordLogin(
+    String email,
+    String password,
+  ) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: "barry.allen@example.com",
-              password: "SuperSecretPassword!");
+          .signInWithEmailAndPassword(email: email, password: password);
 
       await _firebaseFirestore
           .collection('users')

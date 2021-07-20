@@ -41,8 +41,9 @@ abstract class _HomeControllerBase with Store {
   }
 
   @action
-  Future<List<AccessModel>> getAccess(List<EventUsageInfo> eventUsageList) {
-    Future<List<AccessModel>> access = db.getAccess(eventUsageList);
+  Future<List<AccessModel>> getAccess(
+      List<EventUsageInfo> eventUsageList) async {
+    List<AccessModel> access = await db.getAccess(eventUsageList);
     print("Access");
     print(access);
     return access;

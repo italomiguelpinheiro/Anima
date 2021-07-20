@@ -13,7 +13,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends ModularState<LoginPage, LoginController> {
-  
   final _controller = Modular.get<LoginController>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -24,7 +23,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-                  child: Container(
+          child: Container(
             child: Padding(
               padding: const EdgeInsets.all(30.0),
               child: Column(
@@ -76,7 +75,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                   TextFieldContainer(
                     child: TextField(
                       keyboardType: TextInputType.emailAddress,
-                      controller: _emailController ,
+                      controller: _emailController,
                       decoration: InputDecoration(
                           icon: Icon(
                             Icons.person,
@@ -130,11 +129,11 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
-                       //_controller.authUser(_emailController.text, _passwordController.text).then((data) { store.setUser(data);
-                      onPressed: (){
-                    Modular.to.pushReplacementNamed('/home');
-
-                      }),//controller.loginWithEmailAndPassword),
+                      //_controller.authUser(_emailController.text, _passwordController.text).then((data) { store.setUser(data);
+                      onPressed: () {
+                        controller.loginWithEmailAndPassword(
+                            "barry.allen@example.com", "SuperSecretPassword!");
+                      }),
                   SizedBox(height: 20),
                   Center(child: Text("Ou")),
                   SizedBox(height: 20),
