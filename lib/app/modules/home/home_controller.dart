@@ -26,7 +26,6 @@ abstract class _HomeControllerBase with Store {
   @observable
   List acessoCurto = [];
 
-
   logout() async {
     await Modular.get<AuthController>().logout();
     Modular.to.pushReplacementNamed('/');
@@ -37,27 +36,17 @@ abstract class _HomeControllerBase with Store {
   }
 
   @action
-  void addAccess() {
-    db.addAccess();
+  void addAccess(List<EventUsageInfo> eventUsageList) {
+    db.addAccess(eventUsageList);
   }
 
   @action
-  void getAccess() {
-    CollectionReference<AccessModel> access = db.getAccess("com.example.anima");
-    access.get().then((value) => value.docs.forEach((element) {
-          print(access);
-          print(new DateTime.fromMillisecondsSinceEpoch(
-              int.parse(element["count"])));
-          var thirtyMinInMls = 1800000;
-          if (int.parse(element["count"]) >= thirtyMinInMls) {
-            acessoLongo.add(element);
-            print("Acesso longo");
-          } else {
-            acessoCurto.add(element);
-            print("Acesso curto");
-          }
-          print(element.data().toJson());
-        }));
+  Future<List<AccessModel>> getAccess(
+      List<EventUsageInfo> eventUsageList) async {
+    List<AccessModel> access = await db.getAccess(eventUsageList);
+    print("Access");
+    print(access);
+    return access;
   }
 
   @action

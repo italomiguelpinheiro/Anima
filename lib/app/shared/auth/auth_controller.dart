@@ -9,7 +9,6 @@ part 'auth_controller.g.dart';
 class AuthController = _AuthControllerBase with _$AuthController;
 
 abstract class _AuthControllerBase with Store {
-  
   final IAuthRepository _authRepository = Modular.get();
 
   @observable
@@ -24,7 +23,7 @@ abstract class _AuthControllerBase with Store {
     status = value == null ? AuthStatus.logoff : AuthStatus.login;
   }
 
-   _AuthControllerBase() {
+  _AuthControllerBase() {
     User? value = _authRepository.getUser();
     setUser(value);
   }
@@ -36,8 +35,12 @@ abstract class _AuthControllerBase with Store {
   }
 
   @action
-  Future loginWithEmailAndPassword() async {
-    UserCredential? userCredential = await _authRepository.getEmailPasswordLogin();
+  Future loginWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
+    UserCredential? userCredential =
+        await _authRepository.getEmailPasswordLogin(email, password);
     user = userCredential?.user;
   }
 
