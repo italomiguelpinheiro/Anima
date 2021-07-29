@@ -109,7 +109,10 @@ class _SingPageState extends ModularState<SingPage, SingController> {
                           )),
                     ),
                   ),
-                  Text("Mínimo de 8 caracteres. Combine letras e números.",style: TextStyle(fontSize: 10),),
+                  Text(
+                    "Mínimo de 8 caracteres. Combine letras e números.",
+                    style: TextStyle(fontSize: 10),
+                  ),
                   SizedBox(height: 15),
                   TextFieldContainer(
                     child: TextField(
@@ -153,7 +156,8 @@ class _SingPageState extends ModularState<SingPage, SingController> {
                       ),
                       //_controller.authUser(_emailController.text, _passwordController.text).then((data) { store.setUser(data);
                       onPressed: () {
-                        Modular.to.pushReplacementNamed('/home');
+                        controller.createUserWithEmailAndPassword(
+                            "DisplayName", "email", "password");
                       }), //controller.loginWithEmailAndPassword),
                   SizedBox(height: 20),
                   Center(child: Text("Ou")),

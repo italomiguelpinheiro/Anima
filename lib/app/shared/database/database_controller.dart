@@ -4,7 +4,9 @@ import 'package:anima/app/shared/models/config_model.dart';
 import 'package:anima/app/shared/models/emotion_model.dart';
 import 'package:anima/app/shared/models/event_model.dart';
 import 'package:anima/app/shared/models/usage_model.dart';
+import 'package:anima/app/shared/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:usage_stats/usage_stats.dart';
@@ -14,6 +16,7 @@ import 'configs_reposiroty/configs_database_repository_interface.dart';
 import 'emotions_reposiroty/emotions_database_repository_interface.dart';
 import 'events_repository/events_database_repository_interface.dart';
 import 'usage_reposiroty/usage_database_repository_interface.dart';
+import 'user_reposiroty/user_database_repository_interface.dart';
 
 part 'database_controller.g.dart';
 
@@ -25,9 +28,26 @@ abstract class _DatabaseControllerBase with Store {
   final IEmotionsDatabaseRepository _emotionDatabaseRepository = Modular.get();
   final IConfigsDatabaseRepository _configDatabaseRepository = Modular.get();
   final IAccessDatabaseRepository _accessDatabaseRepository = Modular.get();
+  final IUserDatabaseRepository _userDatabaseRepository = Modular.get();
 
   @observable
   SyncStatus status = SyncStatus.loading;
+
+  @action
+  Future<DocumentReference<UserModel>> getUser(String uid) async {
+    return await _userDatabaseRepository.getUser(uid);
+  }
+
+  @action
+  Future<UserCredential?> addUser(
+    String displayName,
+    String email,
+    String password,
+  ) async {
+    UserCredential? userCredential =
+        await _userDatabaseRepository.addUser(displayName, email, password);
+    return userCredential;
+  }
 
   @action
   Future<List<AccessModel>> getAccess(

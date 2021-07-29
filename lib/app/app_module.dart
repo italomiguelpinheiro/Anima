@@ -37,6 +37,8 @@ import 'shared/database/events_repository/events_database_repository.dart';
 import 'shared/database/events_repository/events_database_repository_interface.dart';
 import 'shared/database/usage_reposiroty/usage_database_repository.dart';
 import 'shared/database/usage_reposiroty/usage_database_repository_interface.dart';
+import 'shared/database/user_reposiroty/user_database_repository.dart';
+import 'shared/database/user_reposiroty/user_database_repository_interface.dart';
 
 class AppModule extends MainModule {
   @override
@@ -63,6 +65,8 @@ class AppModule extends MainModule {
             (i) => ConfigDatabaseRepository(FirebaseFirestore.instance)),
         Bind<IAccessDatabaseRepository>(
             (i) => AccessDatabaseRepository(FirebaseFirestore.instance)),
+        Bind<IUserDatabaseRepository>(
+            (i) => UserDatabaseRepository(FirebaseFirestore.instance)),
         //Bind((i) => LocalStorageHive()),
       ];
 
@@ -76,7 +80,6 @@ class AppModule extends MainModule {
         ModularRouter('/content', child: (i, args) => ContentPage()),
         ModularRouter('/remider', child: (i, args) => ReminderPage()),
         ModularRouter('/report', child: (i, args) => ReportPage()),
-
       ];
 
   @override
