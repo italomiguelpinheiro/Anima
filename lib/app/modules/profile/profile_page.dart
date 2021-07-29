@@ -1,3 +1,5 @@
+import 'package:anima/app/modules/splash/splash_page.dart';
+import 'package:anima/app/shared/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,7 +16,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends ModularState<ProfilePage, ProfileController> {
   //use 'controller' variable to access controller
   List selecionadas = [];
-
+  final _authController = Modular.get<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,7 +128,17 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                     height: 10,
                   ),
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _authController.logout();
+                      
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SplashPage(),
+                          ),
+                          ModalRoute.withName('/'),
+                        );
+                    },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5))),
                     color: Colors.black,
