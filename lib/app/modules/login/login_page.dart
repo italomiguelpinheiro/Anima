@@ -1,4 +1,5 @@
 import 'package:anima/app/app_controller.dart';
+import 'package:anima/app/shared/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,6 +18,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   var store = Modular.get<AppController>();
+  final _authController = Modular.get<AuthController>();
 
   @override
   Widget build(BuildContext context) {

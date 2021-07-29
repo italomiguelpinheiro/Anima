@@ -1,4 +1,5 @@
 class UserModel {
+
   String displayName;
   String email;
   String password;
@@ -24,3 +25,4 @@ class UserModel {
     };
   }
 }
+
