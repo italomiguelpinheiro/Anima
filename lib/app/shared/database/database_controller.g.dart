@@ -24,6 +24,22 @@ mixin _$DatabaseController on _DatabaseControllerBase, Store {
     });
   }
 
+  final _$getUserAsyncAction = AsyncAction('_DatabaseControllerBase.getUser');
+
+  @override
+  Future<DocumentReference<UserModel>> getUser(String uid) {
+    return _$getUserAsyncAction.run(() => super.getUser(uid));
+  }
+
+  final _$addUserAsyncAction = AsyncAction('_DatabaseControllerBase.addUser');
+
+  @override
+  Future<UserCredential?> addUser(
+      String displayName, String email, String password) {
+    return _$addUserAsyncAction
+        .run(() => super.addUser(displayName, email, password));
+  }
+
   final _$getAccessAsyncAction =
       AsyncAction('_DatabaseControllerBase.getAccess');
 

@@ -24,6 +24,16 @@ mixin _$SingController on _SingControllerBase, Store {
     });
   }
 
+  final _$createUserWithEmailAndPasswordAsyncAction =
+      AsyncAction('_SingControllerBase.createUserWithEmailAndPassword');
+
+  @override
+  Future<UserCredential?> createUserWithEmailAndPassword(
+      String displayName, String email, String password) {
+    return _$createUserWithEmailAndPasswordAsyncAction.run(() =>
+        super.createUserWithEmailAndPassword(displayName, email, password));
+  }
+
   final _$_SingControllerBaseActionController =
       ActionController(name: '_SingControllerBase');
 
