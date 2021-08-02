@@ -14,6 +14,7 @@ class SingPage extends StatefulWidget {
 
 class _SingPageState extends ModularState<SingPage, SingController> {
   final _controller = Modular.get<SingController>();
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   var store = Modular.get<AppController>();
@@ -76,7 +77,7 @@ class _SingPageState extends ModularState<SingPage, SingController> {
                   TextFieldContainer(
                     child: TextField(
                       keyboardType: TextInputType.text,
-                      controller: _emailController,
+                      controller: _nameController,
                       decoration: InputDecoration(
                           hintText: "Digite seu nome",
                           border: InputBorder.none),
@@ -156,8 +157,8 @@ class _SingPageState extends ModularState<SingPage, SingController> {
                       ),
                       //_controller.authUser(_emailController.text, _passwordController.text).then((data) { store.setUser(data);
                       onPressed: () {
-                        controller.createUserWithEmailAndPassword(
-                            "DisplayName", "email", "password");
+                        _controller.createUserWithEmailAndPassword(
+                            _nameController.text, _emailController.text, _passwordController.text);
                       }), //controller.loginWithEmailAndPassword),
                   SizedBox(height: 20),
                   Center(child: Text("Ou")),

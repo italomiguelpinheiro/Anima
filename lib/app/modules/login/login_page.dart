@@ -134,7 +134,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       //_controller.authUser(_emailController.text, _passwordController.text).then((data) { store.setUser(data);
                       onPressed: () {
                         controller.loginWithEmailAndPassword(
-                            "barry.allen@example.com", "SuperSecretPassword!");
+                            _emailController.text, _passwordController.text);
                       }),
                   SizedBox(height: 20),
                   Center(child: Text("Ou")),

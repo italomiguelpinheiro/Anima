@@ -42,6 +42,7 @@ abstract class _AuthControllerBase with Store {
     UserCredential? userCredential =
         await _authRepository.getEmailPasswordLogin(email, password);
     user = userCredential?.user;
+    print(user);
   }
 
   @action

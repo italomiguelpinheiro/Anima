@@ -17,6 +17,7 @@ abstract class _SingControllerBase with Store {
   @action
   Future<UserCredential?> createUserWithEmailAndPassword(
       String displayName, String email, String password) async {
+    
     UserCredential? userCredential =
         await db.addUser(displayName, email, password);
     Modular.to.pushReplacementNamed('/home');

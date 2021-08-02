@@ -1,6 +1,8 @@
 import 'package:anima/app/modules/emotion/components/container_app.dart';
+import 'package:anima/app/modules/emotion/emotion_controller.dart';
 import 'package:anima/app/modules/reminder/components/custom_switch.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AppRecord extends StatefulWidget {
@@ -14,6 +16,8 @@ class AppRecord extends StatefulWidget {
 class _AppRecordState extends State<AppRecord> {
   List selecionadas = [];
   final _description = TextEditingController();
+   final _controller = Modular.get<EmotionController>();
+
   @override
   void initState() {
     super.initState();
@@ -47,6 +51,7 @@ class _AppRecordState extends State<AppRecord> {
                           ),
                           IconButton(
                             onPressed: () {
+                              //_controller.addEmotion(packageName, status, timeStamp, exposedContent, thoughts);
                               Navigator.pop(context);
                             },
                             icon: Icon(

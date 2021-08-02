@@ -31,6 +31,11 @@ abstract class _HomeControllerBase with Store {
     Modular.to.pushReplacementNamed('/');
   }
 
+
+  getUser () {
+   return  Modular.get<AuthController>().getCurrentUser();
+  }
+
   getToken() async {
     await Modular.get<AuthController>().getToken();
   }

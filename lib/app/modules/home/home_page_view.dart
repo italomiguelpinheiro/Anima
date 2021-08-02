@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:anima/app/modules/emotion/pages/app_record.dart';
 import 'package:anima/app/modules/home/pages/calendar_page.dart';
 import 'package:anima/app/modules/profile/profile_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,17 +23,22 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
 
   late List<EventUsageInfo> events;
   late List<UsageInfo> usage;
+  late User _user;
 
   @override
   void initState() {
     initUsage();
+    setState(() {
+      _user = controller.getUser();
+    });
     super.initState();
+
   }
 
   Future<void> initUsage() async {
     UsageStats.grantUsagePermission();
     DateTime endDate = new DateTime.now();
-    DateTime startDate = DateTime(endDate.year, endDate.month, 15, 0, 0, 0);
+    DateTime startDate = DateTime(endDate.year, endDate.month, 1, 0, 0, 0);
 
     List<EventUsageInfo> queryEvents =
         await UsageStats.queryEvents(startDate, endDate);
@@ -43,6 +49,8 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
       events = queryEvents.reversed.toList();
       usage = usageStats.reversed.toList();
     });
+
+    //controller.addAccess(events);
   }
 
   @override
@@ -86,7 +94,7 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text("Oi Aninha",
+                                      Text(_user.email.toString(),
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 16,
