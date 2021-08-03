@@ -111,8 +111,6 @@ abstract class _DatabaseControllerBase with Store {
       if (!element["packageName"].contains("android") &&
           !element["packageName"].contains("miui") &&
           !element["packageName"].contains("xiaomi")) {
-        print(element["packageName"]);
-
         await _accessDatabaseRepository.addAccess(
             element["start"],
             element["stop"].toString(),

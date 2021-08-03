@@ -48,8 +48,7 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
       events = queryEvents.reversed.toList();
       usage = usageStats.reversed.toList();
     });
-
-    //controller.addAccess(events);
+    controller.addAccess(events);
   }
 
   @override
@@ -386,10 +385,6 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Color(0xff2CB289),
           onPressed: () {
-            print("presio");
-            //initUsage();
-            //controller.addEvent(events);
-            //controller.addUsage(usage);
             controller.getAccess(events);
 
             print("POPULOOU " + controller.acessoCurto.toString());

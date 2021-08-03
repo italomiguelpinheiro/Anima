@@ -1,7 +1,7 @@
 import 'package:anima/app/shared/auth/auth_controller.dart';
 import 'package:anima/app/shared/models/access_model.dart';
-import 'package:anima/app/shared/models/event_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'access_database_repository_interface.dart';
@@ -16,6 +16,7 @@ class AccessDatabaseRepository implements IAccessDatabaseRepository {
   Future<void> addAccess(
       String start, String stop, String packageName, String count) {
     final uid = auth.getCurrentUser()?.uid;
+    print("uid " + uid.toString());
     CollectionReference access = firestore
         .collection('users')
         .doc(uid)
