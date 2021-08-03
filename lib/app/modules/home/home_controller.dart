@@ -8,6 +8,7 @@ import 'package:anima/app/shared/models/emotion_model.dart';
 import 'package:anima/app/shared/models/event_model.dart';
 import 'package:anima/app/shared/models/usage_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:usage_stats/usage_stats.dart';
@@ -31,9 +32,9 @@ abstract class _HomeControllerBase with Store {
     Modular.to.pushReplacementNamed('/');
   }
 
-
-  getUser () {
-   return  Modular.get<AuthController>().getCurrentUser();
+  @action
+  User? getUser() {
+    return Modular.get<AuthController>().getCurrentUser();
   }
 
   getToken() async {

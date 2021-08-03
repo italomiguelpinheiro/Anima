@@ -1,3 +1,4 @@
+import 'package:anima/app/modules/login/login_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -11,6 +12,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  final _controller = Modular.get<LoginController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -49,8 +51,7 @@ class _SplashPageState extends State<SplashPage> {
                         borderRadius: BorderRadius.circular(5)),
                     child: Text("Cadastre-se"),
                     onPressed: () {
-                         Modular.to.pushReplacementNamed('/sing-up');
-
+                      Modular.to.pushReplacementNamed('/sing-up');
                     }),
               ],
             ),
@@ -62,9 +63,7 @@ class _SplashPageState extends State<SplashPage> {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: GestureDetector(
-                  onTap: () {
-                    print("Tocou aqui");
-                  },
+                  onTap: _controller.loginWithGoogle,
                   child: Container(
                     decoration: BoxDecoration(
                         border: Border.all(color: Color(0xff333131)),

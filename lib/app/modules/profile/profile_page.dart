@@ -1,5 +1,6 @@
 import 'package:anima/app/modules/splash/splash_page.dart';
 import 'package:anima/app/shared/auth/auth_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,8 +16,18 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends ModularState<ProfilePage, ProfileController> {
   //use 'controller' variable to access controller
+  late User _user;
   List selecionadas = [];
   final _authController = Modular.get<AuthController>();
+
+  @override
+  void initState() {
+    setState(() {
+      _user = controller.getUser()!;
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,14 +46,24 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                 ],
                 color: Color(0xff2CB289),
               ),
-              child: Row(children: [
-                IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back_ios_new))
-              ],),
+              child: Row(
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.arrow_back_ios_new))
+                ],
+              ),
             ),
-            SizedBox(height: 30,),
-            Image.asset(
-              'assets/perfil/photo.png',
+            SizedBox(
+              height: 30,
             ),
+            _user.photoURL.toString() == "null"
+                ? Image.asset(
+                    'assets/perfil/photo.png',
+                  )
+                : Image.network(_user.photoURL.toString()),
             SizedBox(
               height: 80,
             ),
@@ -51,14 +72,14 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Ana Maria',
+                    _user.displayName.toString(),
                     style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.w600,
                         color: Color(0xff2CB289)),
                   ),
                   Text(
-                    "anamaria@gmail.com",
+                    _user.email.toString(),
                     style: TextStyle(fontSize: 18),
                   ),
                   SizedBox(
@@ -130,14 +151,14 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                   FlatButton(
                     onPressed: () {
                       _authController.logout();
-                      
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SplashPage(),
-                          ),
-                          ModalRoute.withName('/'),
-                        );
+
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SplashPage(),
+                        ),
+                        ModalRoute.withName('/'),
+                      );
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5))),

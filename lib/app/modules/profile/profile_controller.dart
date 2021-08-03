@@ -1,3 +1,5 @@
+import 'package:anima/app/shared/auth/auth_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -13,5 +15,10 @@ abstract class _ProfileControllerBase with Store {
   @action
   void increment() {
     value++;
+  }
+
+  @action
+  User? getUser() {
+    return Modular.get<AuthController>().getCurrentUser();
   }
 }

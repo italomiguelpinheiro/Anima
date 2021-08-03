@@ -29,7 +29,7 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
   void initState() {
     initUsage();
     setState(() {
-      _user = controller.getUser();
+      _user = controller.getUser()!;
     });
     super.initState();
   }

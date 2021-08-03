@@ -57,6 +57,7 @@ abstract class _AuthControllerBase with Store {
 
   @action
   User? getCurrentUser() {
+    print(user);
     return user;
   }
 }
