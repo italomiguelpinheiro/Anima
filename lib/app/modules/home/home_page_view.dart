@@ -32,7 +32,6 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
       _user = controller.getUser();
     });
     super.initState();
-
   }
 
   Future<void> initUsage() async {
@@ -94,7 +93,7 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(_user.email.toString(),
+                                      Text(_user.displayName.toString(),
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 16,

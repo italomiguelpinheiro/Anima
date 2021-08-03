@@ -22,7 +22,9 @@ class UserDatabaseRepository implements IUserDatabaseRepository {
     try {
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
-      userCredential.user!.updateDisplayName(displayName);
+      await userCredential.user!.updateDisplayName(displayName);
+      await userCredential.user!.reload();
+
       return userCredential;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

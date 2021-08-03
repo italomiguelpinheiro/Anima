@@ -24,6 +24,16 @@ mixin _$EmotionController on _EmotionControllerBase, Store {
     });
   }
 
+  final _$addEmotionAsyncAction =
+      AsyncAction('_EmotionControllerBase.addEmotion');
+
+  @override
+  Future<dynamic> addEmotion(String packageName, EmotionStatus status,
+      String timeStamp, String exposedContent, String thoughts) {
+    return _$addEmotionAsyncAction.run(() => super
+        .addEmotion(packageName, status, timeStamp, exposedContent, thoughts));
+  }
+
   final _$_EmotionControllerBaseActionController =
       ActionController(name: '_EmotionControllerBase');
 
