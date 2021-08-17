@@ -39,6 +39,17 @@ mixin _$ProfileController on _ProfileControllerBase, Store {
   }
 
   @override
+  User? getUser() {
+    final _$actionInfo = _$_ProfileControllerBaseActionController.startAction(
+        name: '_ProfileControllerBase.getUser');
+    try {
+      return super.getUser();
+    } finally {
+      _$_ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 value: ${value}

@@ -50,6 +50,15 @@ abstract class _HomeControllerBase with Store {
   Future<List<AccessModel>> getAccess(
       List<EventUsageInfo> eventUsageList) async {
     List<AccessModel> access = await db.getAccess(eventUsageList);
+    var longAcessTime = 500;
+
+    access.forEach((element) {
+      if (int.parse(element.count) > longAcessTime) {
+        acessoLongo.add(element);
+      } else {
+        acessoCurto.add(element);
+      }
+    });
     return access;
   }
 

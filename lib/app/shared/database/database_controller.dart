@@ -53,23 +53,26 @@ abstract class _DatabaseControllerBase with Store {
   Future<List<AccessModel>> getAccess(
       List<EventUsageInfo> usageInfoList) async {
     List<AccessModel> aceessList = [];
+    List visitedApps = [];
 
-    usageInfoList.forEach((element) async {
-      CollectionReference<AccessModel> collectionReference =
-          _accessDatabaseRepository.getAccess(element.packageName);
+    for (var element in usageInfoList) {
+      if (!visitedApps.contains(element.packageName) &&
+          !element.packageName.contains("android") &&
+          !element.packageName.contains("miui") &&
+          !element.packageName.contains("xiaomi")) {
+        visitedApps.add(element.packageName);
 
-      QuerySnapshot<AccessModel> querySnapshot =
-          await collectionReference.get();
+        CollectionReference<AccessModel> collectionReference =
+            _accessDatabaseRepository.getAccess(element.packageName);
 
-      for (var item in querySnapshot.docs) {
-        //print("element" + item.data().packageName + " - " + item.data().count);
-        aceessList.add(item.data());
+        QuerySnapshot<AccessModel> querySnapshot =
+            await collectionReference.get();
+
+        for (var item in querySnapshot.docs) {
+          aceessList.add(item.data());
+        }
       }
-    });
-
-    print("AccessList");
-    print(aceessList);
-
+    }
     return aceessList;
   }
 
