@@ -27,5 +27,10 @@ abstract class _EmotionControllerBase with Store {
     } catch (e) {
       print(e.toString());
     }
+    print("packageName: " +  packageName);
+    print("status: " + status.toString());
+    print("date: " + timeStamp);
+    print("exposedContent: " + exposedContent);
+    print("thoughts: " + thoughts);
   }
 }

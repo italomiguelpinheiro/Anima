@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-Widget containerApp(String pic) {
+Widget containerApp(String pic, BuildContext context) {
   return Padding(
-    padding: const EdgeInsets.only(right: 10.0),
+    padding: const EdgeInsets.only(right: 10.0, bottom: 15),
     child: Column(
       children: [
         Container(
           height: 120,
-          width: 240,
+          width: MediaQuery.of(context).size.width * 0.8,
           decoration: BoxDecoration(
             color: Color(0xffE8E8E8),
             borderRadius: BorderRadius.circular(10),

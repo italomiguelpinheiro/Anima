@@ -187,6 +187,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController> {
   }
 
   _customFlatButtom(String str) {
+     bool find = false;
     return Padding(
       padding: const EdgeInsets.all(3.0),
       child: FlatButton(
@@ -196,18 +197,31 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController> {
           print(selecionadas);
           setState(() {
             if (selecionadas.contains(str)) {
-              setState(() {
-                selecionadas.remove(str);
-                selecionadas = [];
-              });
+              selecionadas.remove(str);
+              find = true;
+              
+              // selecionadas = selecionadas;
             }
-            setState(() {
-              selecionadas.add(str);
-            });
           });
-          print(selecionadas);
+          print(" REMOVEU: {$str} - " + selecionadas.toString());
+          //selecionadas = [];
+          print("MEIO " + selecionadas.toString());
+          print("MEIO adi " + selecionadas.toString());
+          print("MEIO dentro " + selecionadas.toString());
+
+          setState(() {
+            selecionadas.add(str);
+          });
+          if (find == true){
+            selecionadas.remove(str);
+            
+          }
+          print("FIM" + selecionadas.toString());
+
+          print("--------------------------------");
         },
-        color: _returnColor(str),
+        color:
+            selecionadas.contains(str) ? Color(0xff2CB289) : Color(0xffE8E8E8),
         child: Text(str),
       ),
     );

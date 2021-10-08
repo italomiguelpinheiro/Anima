@@ -34,7 +34,7 @@ class _ReminderPageState
                     fontWeight: FontWeight.bold)),
             Text(
               DateTime.now().day.toString() +
-                  " DE JUNHO " +
+                  " DE SETEMBRO " +
                   DateTime.now().year.toString(),
               style: TextStyle(color: Colors.white, fontSize: 12),
             )

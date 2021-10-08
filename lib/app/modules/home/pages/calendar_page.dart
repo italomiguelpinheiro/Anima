@@ -13,7 +13,7 @@ class _CalendarFilterPageState extends State<CalendarFilterPage> {
   List selecionadas = [];
   @override
   Widget build(BuildContext context) {
-  double top = MediaQuery.of(context).size.height * 0.4;
+    double top = MediaQuery.of(context).size.height * 0.4;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -42,11 +42,13 @@ class _CalendarFilterPageState extends State<CalendarFilterPage> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Calendar(),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Padding(
-                padding: const EdgeInsets.only(left:16.0, bottom: 8),
+                padding: const EdgeInsets.only(left: 16.0, bottom: 8),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Períodos de tempo",
@@ -58,29 +60,41 @@ class _CalendarFilterPageState extends State<CalendarFilterPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _customFlatButtom('Hoje'),
                     _customFlatButtom('Semanal'),
                     _customFlatButtom('Quinzenal'),
-                    _customFlatButtom('Mensal'),
                   ],
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    _customFlatButtom('Mensal'),
                     _customFlatButtom('Últimos 3 meses'),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8, right: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                     _customFlatButtom('Últimos 6 meses'),
                     _customFlatButtom('1 ano'),
                   ],
                 ),
               ),
-              SizedBox(height: 25,),
+              SizedBox(
+                height: 25,
+              ),
               Padding(
-                padding: const EdgeInsets.only(left:16.0, bottom: 8),
+                padding: const EdgeInsets.only(left: 16.0, bottom: 8),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Turnos",
@@ -92,6 +106,7 @@ class _CalendarFilterPageState extends State<CalendarFilterPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _customFlatButtom('Dia inteiro'),
                     _customFlatButtom('Madrugada'),
@@ -102,17 +117,20 @@ class _CalendarFilterPageState extends State<CalendarFilterPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _customFlatButtom('Tarde'),
                     _customFlatButtom('Noite'),
                   ],
                 ),
               ),
-               SizedBox(height: 25,),
+              SizedBox(
+                height: 25,
+              ),
               Padding(
-                padding: const EdgeInsets.only(left:16.0, bottom: 8),
+                padding: const EdgeInsets.only(left: 16.0, bottom: 8),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Momento do Registro",
@@ -124,6 +142,7 @@ class _CalendarFilterPageState extends State<CalendarFilterPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _customFlatButtom('5 minutos'),
                     _customFlatButtom('30 minutos'),
@@ -134,18 +153,19 @@ class _CalendarFilterPageState extends State<CalendarFilterPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _customFlatButtom('120 minutos'),
                   ],
                 ),
               ),
-
-            Padding(
-                padding: const EdgeInsets.only(top: 30,bottom:50.0),
+              Padding(
+                padding: const EdgeInsets.only(top: 30, bottom: 50.0),
                 child: FlatButton(
                     minWidth: MediaQuery.of(context).size.width * 0.95,
                     height: 50,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
                     color: Color(0xff2CB289),
                     onPressed: () {
                       Navigator.pop(context);
@@ -155,7 +175,6 @@ class _CalendarFilterPageState extends State<CalendarFilterPage> {
                       style: TextStyle(fontSize: 15, color: Colors.white),
                     )),
               ),
-
             ],
           ),
         ),
@@ -164,6 +183,7 @@ class _CalendarFilterPageState extends State<CalendarFilterPage> {
   }
 
   _customFlatButtom(String str) {
+    bool find = false;
     return Padding(
       padding: const EdgeInsets.all(3.0),
       child: FlatButton(
@@ -173,19 +193,31 @@ class _CalendarFilterPageState extends State<CalendarFilterPage> {
           print(selecionadas);
           setState(() {
             if (selecionadas.contains(str)) {
-              setState(() {
-                selecionadas.remove(str);
-                selecionadas = [];
-              });
+              selecionadas.remove(str);
+              find = true;
+
+              // selecionadas = selecionadas;
             }
-            setState(() {
-              selecionadas.add(str);
-            });
           });
-          print(selecionadas);
+          print(" REMOVEU: {$str} - " + selecionadas.toString());
+          //selecionadas = [];
+          print("MEIO " + selecionadas.toString());
+          print("MEIO adi " + selecionadas.toString());
+          print("MEIO dentro " + selecionadas.toString());
+
+          setState(() {
+            selecionadas.add(str);
+          });
+          if (find == true) {
+            selecionadas.remove(str);
+          }
+          print("FIM" + selecionadas.toString());
+
+          print("--------------------------------");
         },
-        color: returnColor(str),
-        child: Text(str, style: TextStyle(fontSize: 11),),
+        color:
+            selecionadas.contains(str) ? Color(0xff2CB289) : Color(0xffE8E8E8),
+        child: Text(str),
       ),
     );
   }

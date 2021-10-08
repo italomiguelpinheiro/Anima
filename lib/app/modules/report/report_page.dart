@@ -30,7 +30,7 @@ class _ReportPageState extends ModularState<ReportPage, ReportController> {
                     fontWeight: FontWeight.bold)),
             Text(
               DateTime.now().day.toString() +
-                  " DE JULHO " +
+                  " DE SETEMBRO " +
                   DateTime.now().year.toString(),
               style: TextStyle(color: Colors.white, fontSize: 12),
             )

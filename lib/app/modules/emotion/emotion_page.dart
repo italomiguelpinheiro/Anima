@@ -1,5 +1,6 @@
 import 'package:anima/app/modules/emotion/components/card_emotion.dart';
 import 'package:anima/app/modules/emotion/pages/app_record.dart';
+import 'package:anima/app/modules/emotion/pages/app_register.dart';
 import 'package:anima/app/modules/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -60,7 +61,7 @@ class _EmotionPageState extends ModularState<EmotionPage, EmotionController> {
                                         fontWeight: FontWeight.bold)),
                                 Text(
                                   DateTime.now().day.toString() +
-                                      " DE JULHO " +
+                                      " DE SETEMBRO " +
                                       DateTime.now().year.toString(),
                                   style: TextStyle(color: Colors.white),
                                 )
@@ -227,7 +228,7 @@ class _EmotionPageState extends ModularState<EmotionPage, EmotionController> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AppRecord(title: "Candle Crush",)),
+                                  builder: (context) => AppRegister(title: "Candle Crush",)),
                             );
                           },
                         ),
@@ -237,7 +238,7 @@ class _EmotionPageState extends ModularState<EmotionPage, EmotionController> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AppRecord(title: "Instagram",)),
+                                  builder: (context) => AppRegister(title: "Instagram",)),
                             );
                           },
                         ),
@@ -247,7 +248,7 @@ class _EmotionPageState extends ModularState<EmotionPage, EmotionController> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AppRecord(title: "WhatsApp",)),
+                                  builder: (context) => AppRegister(title: "WhatsApp",)),
                             );
                           },
                         ),
@@ -257,7 +258,7 @@ class _EmotionPageState extends ModularState<EmotionPage, EmotionController> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AppRecord(title: "Telegram",)),
+                                  builder: (context) => AppRegister(title: "Telegram",)),
                             );
                           },
                         ),
@@ -267,7 +268,7 @@ class _EmotionPageState extends ModularState<EmotionPage, EmotionController> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AppRecord(title: "Twitter",)),
+                                  builder: (context) => AppRegister(title: "Twitter",)),
                             );
                           },
                         ),

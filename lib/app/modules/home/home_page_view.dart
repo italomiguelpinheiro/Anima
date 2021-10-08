@@ -1,15 +1,17 @@
 import 'dart:async';
-
 import 'package:anima/app/modules/emotion/pages/app_record.dart';
+import 'package:anima/app/modules/emotion/pages/app_register.dart';
+import 'package:anima/app/modules/home/components/analise.dart';
 import 'package:anima/app/modules/home/pages/calendar_page.dart';
 import 'package:anima/app/modules/profile/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:usage_stats/usage_stats.dart';
 import 'home_controller.dart';
-
+import 'package:date_format/date_format.dart';
 class HomePageView extends StatefulWidget {
   final String title;
   const HomePageView({Key? key, this.title = "Home"}) : super(key: key);
@@ -21,10 +23,14 @@ class HomePageView extends StatefulWidget {
 class _HomePageViewState extends ModularState<HomePageView, HomeController> {
   //use 'controller' variable to access controller
 
-  late List<EventUsageInfo> events;
-  late List<UsageInfo> usage;
-  late User _user;
+  late List<dynamic> longEvents = controller.acessoLongo;
+  late List<dynamic> shortEvents = controller.acessoCurto;
 
+  late List<EventUsageInfo> events = [];
+  late List<UsageInfo> usage = [];
+  late User _user;
+  late List<bool> _selected = [true, false, false];
+  late int selectedIndex = 0;
   @override
   void initState() {
     initUsage();
@@ -49,12 +55,12 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
       usage = usageStats.reversed.toList();
     });
     controller.addAccess(events);
+    controller.getAccess(events);
   }
 
   @override
   Widget build(BuildContext context) {
     //controller.addAccess();
-    //controller.getAccess();
 
     return SafeArea(
       child: Scaffold(
@@ -92,6 +98,7 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
+                                      
                                       Text(_user.displayName.toString(),
                                           style: TextStyle(
                                               color: Colors.white,
@@ -99,8 +106,10 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
                                               fontWeight: FontWeight.bold)),
                                       Text(
                                         DateTime.now().day.toString() +
-                                            " DE JULHO " +
-                                            DateTime.now().year.toString(),
+                                            " DE SETEMBRO "  +
+                                         DateTime.now().year.toString(),
+                                          
+
                                         style: TextStyle(color: Colors.white),
                                       )
                                     ],
@@ -197,12 +206,51 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text("Acessos rápidos",
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedIndex = 0;
+                                });
+                              },
+                              child: Text(
+                                "Acessos rápidos",
                                 style: TextStyle(
-                                    color: Color(0xff208062),
-                                    fontWeight: FontWeight.w500)),
-                            Text("Acessos longos"),
-                            Text("Análise"),
+                                    fontSize: 15,
+                                    color: selectedIndex == 0
+                                        ? Color(0xff2CB289)
+                                        : Colors.black),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedIndex = 1;
+                                });
+                              },
+                              child: Text(
+                                "Acessos longos",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: selectedIndex == 1
+                                        ? Color(0xff2CB289)
+                                        : Colors.black),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedIndex = 2;
+                                });
+                              },
+                              child: Text(
+                                "Análise",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: selectedIndex == 2
+                                        ? Color(0xff2CB289)
+                                        : Colors.black),
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -211,158 +259,8 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
                         Container(
                             color: Color(0xffE8E8E8),
                             width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height * 0.41,
-                            child: ListView.builder(
-                                itemBuilder: (context, index) {
-                                  List<String> titleList =
-                                      events[index].packageName.split(".");
-                                  return Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 15,
-                                      ),
-                                      Center(
-                                        child: Container(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.3,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.6,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                titleList[titleList.length - 1],
-                                                style: TextStyle(
-                                                    fontSize: 17,
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                              ),
-                                              SizedBox(
-                                                height: 25,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                      'assets/home/clock.svg'),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        "${DateTime.fromMillisecondsSinceEpoch(int.parse(events[index].timeStamp)).toIso8601String()}",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500),
-                                                      ),
-                                                      Text("Tempo de Uso")
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                      'assets/home/seta.svg'),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        events[index].eventType,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500),
-                                                      ),
-                                                      Text(
-                                                          "Quantidade de acessos")
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              SvgPicture.asset(
-                                                  'assets/home/emotions.svg'),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            AppRecord(
-                                                                title: titleList[
-                                                                    titleList
-                                                                            .length -
-                                                                        1])),
-                                                  );
-                                                },
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Color(
-                                                              0xff333131)),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5))),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            15.0),
-                                                    child: Center(
-                                                      child: Text(
-                                                        "Ver registro emocional",
-                                                        style: TextStyle(
-                                                            color: Color(
-                                                                0xff333131),
-                                                            fontSize: 14,
-                                                            decoration:
-                                                                TextDecoration
-                                                                    .none),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Container(
-                                        height: 2,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        color: Colors.white,
-                                      ),
-                                    ],
-                                  );
-                                },
-                                itemCount: events.length)),
+                            height: MediaQuery.of(context).size.height * 0.6,
+                            child: _returnList()),
                       ],
                     ),
                   ],
@@ -398,5 +296,326 @@ class _HomePageViewState extends ModularState<HomePageView, HomeController> {
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
     );
+
+    // ignore: dead_code
+    Widget CustomRadio(String text, int index) {
+      return OutlineButton(
+        onPressed: () {
+          setState(() {
+            selectedIndex = index;
+          });
+        },
+        child: Text(
+          text,
+          style: TextStyle(
+              color: selectedIndex == index ? Color(0xff2CB289) : Colors.black),
+        ),
+      );
+    }
+
+    Widget AcessoRapido() {
+      return ListView.builder(
+          itemBuilder: (context, index) {
+            List<String> titleList = events[index].packageName.split(".");
+            return Column(
+              children: [
+                SizedBox(
+                  height: 15,
+                ),
+                Center(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          titleList[titleList.length - 1],
+                          style: TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          height: 25,
+                        ),
+                        Row(
+                          children: [
+                            SvgPicture.asset('assets/home/clock.svg'),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${DateTime.fromMillisecondsSinceEpoch(int.parse(events[index].timeStamp)).toIso8601String()}",
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                ),
+                                Text("Tempo de Uso")
+                              ],
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            SvgPicture.asset('assets/home/seta.svg'),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  events[index].eventType,
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                ),
+                                Text("Quantidade de acessos")
+                              ],
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        SvgPicture.asset('assets/home/emotions.svg'),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AppRegister(
+                                      title: titleList[titleList.length - 1])),
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Color(0xff333131)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Center(
+                                child: Text(
+                                  "Ver registro emocional",
+                                  style: TextStyle(
+                                      color: Color(0xff333131),
+                                      fontSize: 14,
+                                      decoration: TextDecoration.none),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AppRecord(
+                                      title: titleList[titleList.length - 1])),
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Color(0xff333131)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Center(
+                                child: Text(
+                                  "Adicionar Registro Emocional",
+                                  style: TextStyle(
+                                      color: Color(0xff333131),
+                                      fontSize: 14,
+                                      decoration: TextDecoration.none),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 2,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.white,
+                ),
+              ],
+            );
+          },
+          itemCount: events.length);
+    }
+  }
+
+  _acessoLongo() {
+    return ListView.builder(
+        itemBuilder: (context, index) {
+          List<String> titleList = events[index].packageName.split(".");
+          return Column(
+            children: [
+              SizedBox(
+                height: 15,
+              ),
+              Center(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        titleList[titleList.length - 1],
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600),
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Row(
+                        children: [
+                          SvgPicture.asset('assets/home/clock.svg'),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${DateTime.fromMillisecondsSinceEpoch(int.parse(events[index].timeStamp)).toIso8601String()}",
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                              Text("Tempo de Uso")
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          SvgPicture.asset('assets/home/seta.svg'),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                events[index].eventType,
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                              Text("Quantidade de acessos")
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      SvgPicture.asset('assets/home/emotions.svg'),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AppRegister(
+                                    title: titleList[titleList.length - 1])),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Color(0xff333131)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Center(
+                              child: Text(
+                                "Ver registro emocional",
+                                style: TextStyle(
+                                    color: Color(0xff333131),
+                                    fontSize: 14,
+                                    decoration: TextDecoration.none),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AppRecord(
+                                    title: titleList[titleList.length - 1])),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Color(0xff333131)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Center(
+                              child: Text(
+                                "Adicionar Registro Emocional",
+                                style: TextStyle(
+                                    color: Color(0xff333131),
+                                    fontSize: 14,
+                                    decoration: TextDecoration.none),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: 2,
+                width: MediaQuery.of(context).size.width,
+                color: Colors.white,
+              ),
+            ],
+          );
+        },
+        itemCount: events.length);
+  }
+
+
+  Widget _returnList() {
+    if (selectedIndex == 0) {
+      return _acessoLongo();
+    } else if (selectedIndex == 1) {
+      return _acessoLongo();
+    } else {
+      return Analise();
+    }
   }
 }
